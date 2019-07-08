@@ -16,7 +16,6 @@ class CollisionSystem {
 		for (solid in solids) {
 			if (c.intersects(solid)) {
 				return true;
-				trace("It hit");
 			}
 		}
 

@@ -19,11 +19,7 @@ class Collider {
 	public var width(get, null):Int;
 	public var height(get, null):Int;
 
-	public function new(level:Level, x:Int, y:Int, width:Int, height:Int, ?centered:Bool) {
-		// *DEBUG:
-		trace('x: ${x}, y: ${y}, h: ${height}, w: ${width}');
-		// *
-
+	public function new(level:Level, x:Int, y:Int, width:Int, height:Int, ?centered:Bool = false) {
 		colSys = level.col;
 
 		xOrigin = centered ? Std.int(width >> 1) : 0;
