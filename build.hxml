@@ -1,0 +1,9 @@
+-lib heaps
+-lib hlsdl
+
+-hl bin/game.hl
+-cp src
+
+-main Game
+
+-D analyzer-optimize
