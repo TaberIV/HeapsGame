@@ -40,6 +40,25 @@ class Collider {
 		return !(xMin >= c.xMax || yMin >= c.yMax || xMax <= c.xMin || yMax <= c.yMin);
 	}
 
+	public function intersectsAt(c:Collider, x:Int, y:Int) {
+		// Store current location
+		var tx = this.x;
+		var ty = this.y;
+
+		// Temporarily move
+		this.x = x;
+		this.y = y;
+
+		// Test intersection
+		var intersects = intersects(c);
+
+		// Move back
+		this.x = tx;
+		this.y = ty;
+
+		return intersects;
+	}
+
 	public function collideAt(x:Int, y:Int) {
 		// Store current location
 		var tx = this.x;

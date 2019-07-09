@@ -49,19 +49,31 @@ class Player extends Actor {
 		velX = controller.xAxis * moveSpeed;
 
 		// * Verticle velocity
-		// Gravity
-		fastFall = velY < 0 && (!controller.jumpDown || fastFall);
-		var grav = fastFall ? fastGravity : gravity;
-		velY += grav * dt;
+		var yAcc = accelerateY(dt);
+
+		// * Move
+		moveX(velX * dt, colX);
+		moveY(util.Math.calcMovement(velY, dt, yAcc), colY);
+	}
+
+	private function accelerateY(dt:Float):Float {
+		var yAcc = applyGravity(dt);
 
 		// Jump
 		if (isGrounded() && controller.jumpPressed) {
 			velY = jumpVelocity;
+			yAcc = 0;
 		}
 
-		// * Move
-		moveX(velX * dt, colX);
-		moveY(util.Math.calcMovement(velY, dt, grav), colY);
+		return yAcc;
+	}
+
+	private function applyGravity(dt:Float):Float {
+		fastFall = velY < 0 && (!controller.jumpDown || fastFall);
+		var grav = fastFall ? fastGravity : gravity;
+		velY += grav * dt;
+
+		return grav;
 	}
 
 	private function isGrounded() {
@@ -74,5 +86,9 @@ class Player extends Actor {
 
 	private function colY() {
 		velY = 0;
+	}
+
+	public override function isRiding(solid:Solid):Bool {
+		return col.intersectsAt(solid.col, x, y + 1);
 	}
 }

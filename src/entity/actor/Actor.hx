@@ -61,4 +61,8 @@ class Actor extends Entity {
 			}
 		}
 	}
+
+	public function isRiding(solid:Solid):Bool {
+		return false;
+	}
 }
