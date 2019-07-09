@@ -65,4 +65,8 @@ class Actor extends Entity {
 	public function isRiding(solid:Solid):Bool {
 		return false;
 	}
+
+	public function squish():Void {
+		destroy();
+	}
 }

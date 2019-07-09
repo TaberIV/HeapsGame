@@ -17,4 +17,9 @@ class Sprite extends h2d.Object {
 
 		super.draw(ctx);
 	}
+
+	public function destroy() {
+		ent = null;
+		remove();
+	}
 }

@@ -11,8 +11,12 @@ class CollisionSystem {
 		solids = new Array<Collider>();
 	}
 
-	public function addSolid(c:Collider) {
+	public function addSolid(c:Collider):Void {
 		solids.push(c);
+	}
+
+	public function removeSolid(c:Collider):Bool {
+		return solids.remove(c);
 	}
 
 	public function collidesSolid(c:Collider):Bool {

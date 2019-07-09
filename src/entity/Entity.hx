@@ -37,4 +37,18 @@ class Entity {
 	public function init() {}
 
 	public function update(dt:Float):Void {}
+
+	public function destroy() {
+		if (spr != null) {
+			spr.destroy();
+			spr = null;
+		}
+
+		if (col != null) {
+			col.destroy();
+			col = null;
+		}
+
+		level.removeEntity(this);
+	}
 }

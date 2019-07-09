@@ -33,7 +33,7 @@ class Player extends Actor {
 	override public function init() {
 		// Create sprite
 		spr = new draw.BoxSprite(this, width, height, 0xFF0000, true);
-		col = new collision.Collider(level, this.x, this.y, width, height, true);
+		col = new collision.Collider(level, this.x, this.y, width, height, false, true);
 
 		// Create input controller
 		controller = new PlayerKeyboard();
@@ -90,5 +90,10 @@ class Player extends Actor {
 
 	public override function isRiding(solid:Solid):Bool {
 		return col.intersectsAt(solid.col, x, y + 1);
+	}
+
+	public override function destroy() {
+		super.destroy();
+		controller = null;
 	}
 }

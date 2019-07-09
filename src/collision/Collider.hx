@@ -1,7 +1,5 @@
 package collision;
 
-import h2d.col.IBounds;
-
 /**
 	Axis Aligned Bounding Box connected to Entity
 **/
@@ -23,7 +21,9 @@ class Collider {
 	public var width(get, null):Int;
 	public var height(get, null):Int;
 
-	public function new(level:Level, x:Int, y:Int, width:Int, height:Int, ?centered:Bool = false) {
+	public var solid(default, null):Bool;
+
+	public function new(level:Level, x:Int, y:Int, width:Int, height:Int, solid:Bool, ?centered:Bool) {
 		colSys = level.col;
 
 		xOrigin = centered ? Std.int(width >> 1) : 0;
@@ -34,6 +34,11 @@ class Collider {
 
 		xMax = xMin + width;
 		yMax = yMin + height;
+
+		this.solid = solid;
+		if (solid) {
+			colSys.addSolid(this);
+		}
 	}
 
 	public inline function intersects(c:Collider) {
@@ -106,5 +111,11 @@ class Collider {
 
 	inline function get_height() {
 		return yMax - yMin;
+	}
+
+	public function destroy():Void {
+		if (solid) {
+			colSys.removeSolid(this);
+		}
 	}
 }

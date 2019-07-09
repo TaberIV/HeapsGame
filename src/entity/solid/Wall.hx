@@ -14,7 +14,6 @@ class Wall extends Solid {
 		this.height = height;
 
 		spr = new draw.BoxSprite(this, width, height, 0x707070, false);
-		col = new collision.Collider(level, this.x, this.y, width, height);
-		level.col.addSolid(col);
+		col = new collision.Collider(level, this.x, this.y, width, height, true);
 	}
 }

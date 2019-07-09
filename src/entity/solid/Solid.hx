@@ -1,6 +1,8 @@
 package entity.solid;
 
 /**
-	Solids are Entities that actors cannot overlap with. A solid may, or may not, move.
+	`Solids` are `Entities` that `Actors` cannot overlap with. A `Solid` may, or may not, move.
 **/
-class Solid extends Entity {}
+class Solid extends Entity {
+	public function move(x:Float, y:Float) {}
+}
