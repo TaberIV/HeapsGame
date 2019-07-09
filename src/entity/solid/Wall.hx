@@ -1,5 +1,8 @@
 package entity.solid;
 
+/**
+	Wall is a quick way to create a Solid in code.
+**/
 class Wall extends Solid {
 	private var width:Int;
 	private var height:Int;

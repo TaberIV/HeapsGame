@@ -1,5 +1,8 @@
 package collision;
 
+/**
+	CollisionSystem handles collisions in a level.
+ */
 class CollisionSystem {
 	// private var actors:Array<Collider>;
 	private var solids:Array<Collider>;
@@ -12,7 +15,7 @@ class CollisionSystem {
 		solids.push(c);
 	}
 
-	public function collides(c:Collider):Bool {
+	public function collidesSolid(c:Collider):Bool {
 		for (solid in solids) {
 			if (c.intersects(solid)) {
 				return true;

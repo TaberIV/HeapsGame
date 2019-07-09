@@ -1,7 +1,11 @@
 package entity.actor;
 
+import entity.solid.Solid;
 import input.player.*;
 
+/**
+	Player controlled Actor.
+**/
 class Player extends Actor {
 	// Size Constants
 	private static inline var width:Int = 32;

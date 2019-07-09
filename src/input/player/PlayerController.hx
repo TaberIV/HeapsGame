@@ -1,5 +1,8 @@
 package input.player;
 
+/**
+	The base class for different input methods for the Player.
+**/
 interface PlayerController {
 	public var xAxis(get, null):Float;
 	public var yAxis(get, null):Float;

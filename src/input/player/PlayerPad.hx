@@ -2,6 +2,9 @@ package input.player;
 
 import hxd.Pad;
 
+/**
+	Implements Gamepad input for the Player.
+**/
 class PlayerPad implements PlayerController {
 	private var pad:Pad;
 

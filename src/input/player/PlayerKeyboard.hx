@@ -2,6 +2,9 @@ package input.player;
 
 import hxd.Key;
 
+/**
+	Implements keyboard input for the Player.
+**/
 class PlayerKeyboard implements PlayerController {
 	public var xAxis(get, null):Float;
 	public var yAxis(get, null):Float;

@@ -2,6 +2,9 @@ package entity.actor;
 
 import entity.solid.Solid;
 
+/**
+	Actors are Entities that move and collide with solids.
+**/
 class Actor extends Entity {
 	public function moveX(amount:Float, ?action:() -> Void) {
 		xRemainder += amount;

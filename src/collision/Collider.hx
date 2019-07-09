@@ -1,6 +1,10 @@
 package collision;
 
-// Axis Aligned Bounding Box connected to Entity
+import h2d.col.IBounds;
+
+/**
+	Axis Aligned Bounding Box connected to Entity
+**/
 class Collider {
 	private var colSys:CollisionSystem;
 
@@ -46,7 +50,7 @@ class Collider {
 		this.y = y;
 
 		// Test collision
-		var collide = colSys.collides(this);
+		var collide = colSys.collidesSolid(this);
 
 		// Move back
 		this.x = tx;

@@ -1,5 +1,8 @@
 package entity;
 
+/**
+	Entities are game objects that makeup or interact with the level.
+**/
 class Entity {
 	private var xRemainder:Float;
 	private var yRemainder:Float;

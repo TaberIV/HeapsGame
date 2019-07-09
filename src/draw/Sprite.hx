@@ -1,5 +1,8 @@
 package draw;
 
+/**
+	Sprite is a wrapper class for `h2d.Object`.
+**/
 class Sprite extends h2d.Object {
 	var ent:entity.Entity;
 
