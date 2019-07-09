@@ -5,3 +5,5 @@
 -cp src
 -hl bin/game.hl
 -main Game
+
+-D windowSize=640x480
