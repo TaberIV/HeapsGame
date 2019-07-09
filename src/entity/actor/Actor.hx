@@ -21,7 +21,6 @@ class Actor extends Entity {
 					move -= sign;
 				} else {
 					// Collision with solid
-					xRemainder = sign > 0 ? Math.floor(xRemainder) : Math.ceil(xRemainder);
 					move = 0;
 
 					if (action != null) {
@@ -50,7 +49,6 @@ class Actor extends Entity {
 					move -= sign;
 				} else {
 					// Collision with solid
-					yRemainder = sign > 0 ? Math.floor(yRemainder) : Math.ceil(yRemainder);
 					move = 0;
 
 					if (action != null) {

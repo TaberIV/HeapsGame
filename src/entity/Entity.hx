@@ -17,6 +17,8 @@ class Entity {
 		set_y_Float(y);
 
 		this.level = level;
+
+		init();
 	}
 
 	private function set_x_Float(x:Float) {
@@ -28,6 +30,8 @@ class Entity {
 		this.y = Math.round(y);
 		yRemainder = y - this.y;
 	}
+
+	public function init() {}
 
 	public function update(dt:Float):Void {}
 }

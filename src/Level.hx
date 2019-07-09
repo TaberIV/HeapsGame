@@ -12,8 +12,9 @@ class Level extends h2d.Scene {
 
 		// ! Test
 		ents.push(new entity.actor.Player(this, width / 2, height / 2));
-		ents.push(new entity.solid.Wall(this, width / 4, height / 2, 32, 64));
+		ents.push(new entity.solid.Wall(this, 64, height - 181, 192, 32));
 		ents.push(new entity.solid.Wall(this, 3 * width / 4, height / 2, 32, 64));
+		ents.push(new entity.solid.Wall(this, 0, height - 32, width - 128, 32));
 	}
 
 	public function update(dt:Float):Void {
