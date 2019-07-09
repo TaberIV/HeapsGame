@@ -4,11 +4,19 @@ package collision;
 	CollisionSystem handles collisions in a level.
  */
 class CollisionSystem {
-	// private var actors:Array<Collider>;
+	private var actors:Array<Collider>;
 	private var solids:Array<Collider>;
 
 	public function new() {
 		solids = new Array<Collider>();
+	}
+
+	public function addActor(c:Collider):Void {
+		actors.push(c);
+	}
+
+	public function removeActor(c:Collider):Bool {
+		return actors.remove(c);
 	}
 
 	public function addSolid(c:Collider):Void {

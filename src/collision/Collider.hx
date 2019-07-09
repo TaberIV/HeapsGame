@@ -38,6 +38,8 @@ class Collider {
 		this.solid = solid;
 		if (solid) {
 			colSys.addSolid(this);
+		} else {
+			colSys.addActor(this);
 		}
 	}
 
@@ -83,6 +85,10 @@ class Collider {
 		return collide;
 	}
 
+	public function getRidingActors():Array<entity.actor.Actor> {
+		return new Array<entity.actor.Actor>();
+	}
+
 	inline function get_x() {
 		return xMin + xOrigin;
 	}
@@ -116,6 +122,8 @@ class Collider {
 	public function destroy():Void {
 		if (solid) {
 			colSys.removeSolid(this);
+		} else {
+			colSys.removeActor(this);
 		}
 	}
 }

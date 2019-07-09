@@ -1,9 +1,10 @@
+import collision.*;
 import entity.Entity;
 
 class Level extends h2d.Scene {
 	public var game:Game;
 	public var ents:Array<Entity>;
-	public var col:collision.CollisionSystem;
+	public var col:CollisionSystem;
 
 	public function new(game:Game) {
 		super();
