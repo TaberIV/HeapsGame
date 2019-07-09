@@ -1,13 +1,9 @@
 package input.player;
 
-class PlayerController implements Controller {
-	public var xAxis:Float;
-	public var yAxis:Float;
+interface PlayerController {
+	public var xAxis(get, null):Float;
+	public var yAxis(get, null):Float;
 
-	public var jumpDown:Bool;
-	public var jumpPressed:Bool;
-
-	public function resetPressed():Void {
-		jumpPressed = false;
-	}
+	public var jumpDown(get, null):Bool;
+	public var jumpPressed(get, null):Bool;
 }

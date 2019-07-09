@@ -2,62 +2,46 @@ package input.player;
 
 import hxd.Key;
 
-class PlayerKeyboard extends PlayerController {
-	private var leftDown:Bool;
-	private var rightDown:Bool;
+class PlayerKeyboard implements PlayerController {
+	public var xAxis(get, null):Float;
+	public var yAxis(get, null):Float;
 
-	private var upDown:Bool;
-	private var downDown:Bool;
+	public var jumpDown(get, null):Bool;
+	public var jumpPressed(get, null):Bool;
 
-	private var wasJumpReleased:Bool;
+	public function get_xAxis():Float {
+		var ret = 0;
 
-	public function new() {
-		leftDown = false;
-		rightDown = false;
-
-		wasJumpReleased = false;
-
-		hxd.Window.getInstance().addEventTarget(onEvent);
-	}
-
-	function onEvent(event:hxd.Event) {
-		switch (event.kind) {
-			case EKeyDown:
-				switch (event.keyCode) {
-					case Key.LEFT:
-						leftDown = true;
-						xAxis = rightDown ? 0 : -1;
-					case Key.RIGHT:
-						rightDown = true;
-						xAxis = leftDown ? 0 : 1;
-					case Key.UP:
-						upDown = true;
-						yAxis = downDown ? 0 : -1;
-					case Key.DOWN:
-						downDown = true;
-						yAxis = upDown ? 0 : 1;
-					case Key.SPACE:
-						jumpPressed = !jumpDown;
-						jumpDown = true;
-				}
-			case EKeyUp:
-				switch (event.keyCode) {
-					case Key.LEFT:
-						leftDown = false;
-						xAxis = rightDown ? 1 : 0;
-					case Key.RIGHT:
-						rightDown = false;
-						xAxis = leftDown ? -1 : 0;
-					case Key.UP:
-						upDown = false;
-						yAxis = downDown ? 1 : 0;
-					case Key.DOWN:
-						downDown = false;
-						yAxis = upDown ? -1 : 0;
-					case Key.SPACE:
-						jumpDown = false;
-				}
-			default:
+		if (Key.isDown(Key.LEFT)) {
+			ret -= 1;
 		}
+		if (Key.isDown(Key.RIGHT)) {
+			ret += 1;
+		}
+
+		return ret;
 	}
+
+	public function get_yAxis():Float {
+		var ret = 0;
+
+		if (Key.isDown(Key.UP)) {
+			ret -= 1;
+		}
+		if (Key.isDown(Key.DOWN)) {
+			ret += 1;
+		}
+
+		return ret;
+	}
+
+	public function get_jumpDown() {
+		return Key.isDown(Key.SPACE);
+	}
+
+	public function get_jumpPressed() {
+		return Key.isPressed(Key.SPACE);
+	}
+
+	public function new() {}
 }

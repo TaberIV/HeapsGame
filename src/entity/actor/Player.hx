@@ -1,6 +1,5 @@
 package entity.actor;
 
-import collision.Collider;
 import input.player.*;
 
 class Player extends Actor {
@@ -30,11 +29,10 @@ class Player extends Actor {
 	override public function init() {
 		// Create sprite
 		spr = new draw.BoxSprite(this, width, height, 0xFF0000, true);
-		col = new Collider(level, this.x, this.y, width, height, true);
+		col = new collision.Collider(level, this.x, this.y, width, height, true);
 
 		// Create input controller
-		controller = new PlayerKeyboard();
-		level.game.registerController(controller);
+		controller = new PlayerPad();
 
 		// Determine movement values
 		jumpVelocity = -2 * jumpHeight * moveSpeed / (jumpDist / 2);
