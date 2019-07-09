@@ -1,7 +1,7 @@
 package collision;
 
 class CollisionSystem {
-	// private var actors:Array<Actor>;
+	// private var actors:Array<Collider>;
 	private var solids:Array<Collider>;
 
 	public function new() {
