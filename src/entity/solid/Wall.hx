@@ -1,8 +1,8 @@
 package entity.solid;
 
 class Wall extends Solid {
-	public var width:Int;
-	public var height:Int;
+	private var width:Int;
+	private var height:Int;
 
 	override public function new(level:Level, x:Float, y:Float, width:Int, height:Int) {
 		super(level, x, y);
@@ -10,8 +10,8 @@ class Wall extends Solid {
 		this.width = width;
 		this.height = height;
 
-		spr = new draw.WallSprite(this);
-		col = new collision.Collider(level, this.x, this.y, width, height, true);
+		spr = new draw.BoxSprite(this, width, height, 0x707070, false);
+		col = new collision.Collider(level, this.x, this.y, width, height);
 		level.col.addSolid(col);
 	}
 }

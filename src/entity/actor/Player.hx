@@ -4,7 +4,10 @@ import collision.Collider;
 import input.player.*;
 
 class Player extends Actor {
-	private static inline var moveSpeed = 200;
+	private var width:Int = 32;
+	private var height:Int = 52;
+
+	private var moveSpeed:Float = 200;
 
 	private var velX:Float;
 	private var velY:Float;
@@ -15,10 +18,10 @@ class Player extends Actor {
 		super(level, x, y);
 
 		// Create sprite
-		spr = new draw.PlayerSprite(this);
-		col = new Collider(level, this.x, this.y, 32, 52, true);
+		spr = new draw.BoxSprite(this, width, height, 0xFF0000, true);
+		col = new Collider(level, this.x, this.y, width, height, true);
 
-		// Create controller
+		// Create input controller
 		controller = new PlayerKeyboard();
 		level.game.registerController(controller);
 	}
