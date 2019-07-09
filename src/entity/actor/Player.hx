@@ -4,8 +4,8 @@ import input.player.*;
 
 class Player extends Actor {
 	// Size Constants
-	private var width:Int = 32;
-	private var height:Int = 52;
+	private static inline var width:Int = 32;
+	private static inline var height:Int = 52;
 
 	// Movement parameters
 	private var moveSpeed:Float = 200;
