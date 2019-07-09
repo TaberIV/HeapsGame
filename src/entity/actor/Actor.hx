@@ -3,7 +3,7 @@ package entity.actor;
 import entity.solid.Solid;
 
 class Actor extends Entity {
-	public function moveX(amount:Float) {
+	public function moveX(amount:Float, ?action:() -> Void) {
 		xRemainder += amount;
 		var move:Int = Math.round(xRemainder);
 
@@ -16,18 +16,23 @@ class Actor extends Entity {
 				if (col == null || !col.collideAt(x + sign, y)) {
 					// No collision
 					x += sign;
-					move -= sign;
 					col.x = x;
+
+					move -= sign;
 				} else {
 					// Collision with solid
-					xRemainder = 0;
-					break;
+					xRemainder = sign > 0 ? Math.floor(xRemainder) : Math.ceil(xRemainder);
+					move = 0;
+
+					if (action != null) {
+						action();
+					}
 				}
 			}
 		}
 	}
 
-	public function moveY(amount:Float) {
+	public function moveY(amount:Float, ?action:() -> Void) {
 		yRemainder += amount;
 		var move:Int = Math.round(yRemainder);
 
@@ -40,11 +45,17 @@ class Actor extends Entity {
 				if (col == null || !col.collideAt(x, y + sign)) {
 					// No collision
 					y += sign;
-					move -= sign;
 					col.y = y;
+
+					move -= sign;
 				} else {
 					// Collision with solid
+					yRemainder = sign > 0 ? Math.floor(yRemainder) : Math.ceil(yRemainder);
 					move = 0;
+
+					if (action != null) {
+						action();
+					}
 				}
 			}
 		}

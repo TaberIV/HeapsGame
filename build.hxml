@@ -1,9 +1,7 @@
--lib heaps
--lib hlsdl
-
--hl bin/game.hl
 -cp src
-
+-hl bin/game.hl
 -main Game
 
--D analyzer-optimize
+-lib heaps
+-lib hlsdl
+-lib castle
