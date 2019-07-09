@@ -8,6 +8,7 @@ class CollisionSystem {
 	private var solids:Array<Collider>;
 
 	public function new() {
+		actors = new Array<Collider>();
 		solids = new Array<Collider>();
 	}
 
