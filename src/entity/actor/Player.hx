@@ -32,7 +32,7 @@ class Player extends Actor {
 		col = new collision.Collider(level, this.x, this.y, width, height, true);
 
 		// Create input controller
-		controller = new PlayerPad();
+		controller = new PlayerKeyboard();
 
 		// Determine movement values
 		jumpVelocity = -2 * jumpHeight * moveSpeed / (jumpDist / 2);
