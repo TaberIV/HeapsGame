@@ -9,6 +9,7 @@ class ActorCollider extends Collider {
 		super(ent, x, y, width, height, centered);
 
 		actor = ent;
+		colSys.addActor(actor);
 	}
 
 	public override function destroy() {
