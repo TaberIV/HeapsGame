@@ -12,7 +12,7 @@ class PlayerKeyboard implements PlayerController {
 	public var jumpDown(get, null):Bool;
 	public var jumpPressed(get, null):Bool;
 
-	public function get_xAxis():Float {
+	function get_xAxis():Float {
 		var ret = 0;
 
 		if (Key.isDown(Key.LEFT)) {
@@ -25,7 +25,7 @@ class PlayerKeyboard implements PlayerController {
 		return ret;
 	}
 
-	public function get_yAxis():Float {
+	function get_yAxis():Float {
 		var ret = 0;
 
 		if (Key.isDown(Key.UP)) {
@@ -38,11 +38,11 @@ class PlayerKeyboard implements PlayerController {
 		return ret;
 	}
 
-	public function get_jumpDown() {
+	function get_jumpDown() {
 		return Key.isDown(Key.SPACE);
 	}
 
-	public function get_jumpPressed() {
+	function get_jumpPressed() {
 		return Key.isPressed(Key.SPACE);
 	}
 

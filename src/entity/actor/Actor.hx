@@ -21,7 +21,6 @@ class Actor extends Entity {
 				if (col == null || !col.collideAt(x + sign, y)) {
 					// No collision
 					x += sign;
-					col.x = x;
 
 					move -= sign;
 				} else {
@@ -49,7 +48,6 @@ class Actor extends Entity {
 				if (col == null || !col.collideAt(x, y + sign)) {
 					// No collision
 					y += sign;
-					col.y = y;
 
 					move -= sign;
 				} else {

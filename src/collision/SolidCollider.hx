@@ -5,8 +5,8 @@ import entity.solid.Solid;
 class SolidCollider extends Collider {
 	private var solid:Solid;
 
-	public function new(ent:Solid, x:Int, y:Int, width:Int, height:Int, ?centered:Bool = false) {
-		super(ent, x, y, width, height, centered);
+	public function new(ent:Solid, width:Int, height:Int, ?centered:Bool = false) {
+		super(ent, width, height, centered);
 
 		solid = ent;
 		colSys.addSolid(solid);

@@ -21,33 +21,31 @@ class Solid extends Entity {
 			if (moveX != 0) {
 				xRemainder -= moveX;
 				this.x += moveX;
-				col.x = this.x;
 
 				// Push or carry actors
-				level.col.forEachActor(function(a:Actor) {
+				for (a in level.col.actors) {
 					if (a.col.intersects(col)) {
 						var aMove = moveX > 0 ? col.xMax - a.col.xMin : col.xMin - a.col.xMax;
 						a.moveX(aMove, a.squish);
 					} else if (a.isRiding(this)) {
 						a.moveX(moveX);
 					}
-				});
+				}
 			}
 
 			if (moveY != 0) {
 				yRemainder -= moveY;
 				this.y += moveY;
-				col.y = this.y;
 
 				// Push or carry actors
-				level.col.forEachActor(function(a:Actor) {
+				for (a in level.col.actors) {
 					if (a.col.intersects(col)) {
 						var aMove = moveY > 0 ? col.yMax - a.col.yMin : col.yMin - a.col.yMax;
 						a.moveY(aMove, a.squish);
 					} else if (a.isRiding(this)) {
 						a.moveY(moveY);
 					}
-				});
+				}
 			}
 		}
 

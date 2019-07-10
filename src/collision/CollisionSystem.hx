@@ -7,8 +7,8 @@ import entity.solid.Solid;
 	CollisionSystem handles collisions in a level.
  */
 class CollisionSystem {
-	private var actors:Array<Actor>;
-	private var solids:Array<Solid>;
+	public var actors:Array<Actor>;
+	public var solids:Array<Solid>;
 
 	public function new() {
 		actors = new Array<Actor>();
@@ -40,32 +40,5 @@ class CollisionSystem {
 		}
 
 		return oActors;
-	}
-
-	public function getRidingActors(s:Solid):Array<Actor> {
-		var rActors = new Array<Actor>();
-		for (a in actors) {
-			if (a.isRiding(s)) {
-				rActors.push(a);
-			}
-		}
-
-		return rActors;
-	}
-
-	public function collidesSolid(s:Collider):Bool {
-		for (solid in solids) {
-			if (solid.col.active && s.intersects(solid.col)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	public function forEachActor(func:Actor->Void) {
-		for (a in actors) {
-			func(a);
-		}
 	}
 }

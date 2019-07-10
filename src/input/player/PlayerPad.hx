@@ -14,19 +14,19 @@ class PlayerPad implements PlayerController {
 	public var jumpDown(get, null):Bool;
 	public var jumpPressed(get, null):Bool;
 
-	public function get_xAxis():Float {
+	function get_xAxis():Float {
 		return pad.xAxis;
 	}
 
-	public function get_yAxis():Float {
+	function get_yAxis():Float {
 		return pad.yAxis;
 	}
 
-	public function get_jumpDown() {
+	function get_jumpDown() {
 		return pad.isDown(Pad.DEFAULT_CONFIG.A);
 	}
 
-	public function get_jumpPressed() {
+	function get_jumpPressed() {
 		return pad.isPressed(Pad.DEFAULT_CONFIG.A);
 	}
 
