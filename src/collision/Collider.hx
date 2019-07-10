@@ -6,17 +6,17 @@ import entity.Entity;
 	Axis Aligned Bounding Box connected to Entity
 **/
 class Collider {
-	private var xMin:Int;
-	private var yMin:Int;
-
-	private var xMax:Int;
-	private var yMax:Int;
-
 	private var xOrigin:Int;
 	private var yOrigin:Int;
 
 	private var ent:entity.Entity;
 	private var colSys:CollisionSystem;
+
+	public var xMin:Int;
+	public var yMin:Int;
+
+	public var xMax(default, null):Int;
+	public var yMax(default, null):Int;
 
 	public var x(get, set):Int;
 	public var y(get, set):Int;

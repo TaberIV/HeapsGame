@@ -6,6 +6,17 @@ import entity.actor.Actor;
 class SolidCollider extends Collider {
 	private var solid:Solid;
 
+	public var active(default, set):Bool;
+
+	private function set_active(newActive:Bool):Bool {
+		if (newActive != active) {
+			active = newActive;
+			active ? colSys.addSolid(solid) : colSys.removeSolid(solid);
+		}
+
+		return newActive;
+	}
+
 	public function new(ent:Solid, x:Int, y:Int, width:Int, height:Int, ?centered:Bool = false) {
 		super(ent, x, y, width, height, centered);
 
@@ -14,11 +25,11 @@ class SolidCollider extends Collider {
 	}
 
 	public function getRidingActors():Array<Actor> {
-		return colSys.getRidingActors(cast(ent));
+		return colSys.getRidingActors(solid);
 	}
 
 	public override function destroy() {
-		colSys.removeSolid(cast(ent));
+		colSys.removeSolid(solid);
 		super.destroy();
 	}
 }

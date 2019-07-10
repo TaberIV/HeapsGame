@@ -62,4 +62,10 @@ class CollisionSystem {
 
 		return false;
 	}
+
+	public function forEachActor(func:Actor->Void) {
+		for (a in actors) {
+			func(a);
+		}
+	}
 }
