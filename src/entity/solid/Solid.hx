@@ -16,7 +16,6 @@ class Solid extends Entity {
 		var moveY:Int = Math.round(yRemainder);
 
 		if (moveX != 0 || moveY != 0) {
-			var riders = col.getRidingActors();
 			col.active = false;
 
 			if (moveX != 0) {

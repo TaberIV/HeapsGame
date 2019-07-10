@@ -55,7 +55,7 @@ class CollisionSystem {
 
 	public function collidesSolid(s:Collider):Bool {
 		for (solid in solids) {
-			if (s.intersects(solid.col)) {
+			if (solid.col.active && s.intersects(solid.col)) {
 				return true;
 			}
 		}

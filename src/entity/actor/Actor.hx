@@ -26,11 +26,11 @@ class Actor extends Entity {
 					move -= sign;
 				} else {
 					// Collision with solid
-					move = 0;
-
 					if (action != null) {
 						action();
 					}
+
+					move = 0;
 				}
 			}
 		}

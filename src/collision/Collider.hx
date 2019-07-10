@@ -24,6 +24,8 @@ class Collider {
 	public var width(get, null):Int;
 	public var height(get, null):Int;
 
+	public var active:Bool = true;
+
 	public function new(ent:Entity, x:Int, y:Int, width:Int, height:Int, ?centered:Bool = false) {
 		this.ent = ent;
 		colSys = ent.level.col;
