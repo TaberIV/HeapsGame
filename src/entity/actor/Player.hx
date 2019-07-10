@@ -33,7 +33,8 @@ class Player extends Actor {
 	override public function init() {
 		// Create sprite
 		spr = new draw.BoxSprite(this, width, height, 0xFF0000, true);
-		col = new collision.Collider(level, this.x, this.y, width, height, false, true);
+		col = new collision.ActorCollider(this, this.x, this.y, width, height);
+		level.col.addActor(this);
 
 		// Create input controller
 		controller = new PlayerKeyboard();

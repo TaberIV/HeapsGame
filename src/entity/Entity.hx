@@ -13,7 +13,6 @@ class Entity {
 	public var y(default, null):Int;
 
 	public var level:Level;
-	public var col:collision.Collider;
 
 	public function new(level:Level, x:Float, y:Float) {
 		set_x_Float(x);
@@ -42,11 +41,6 @@ class Entity {
 		if (spr != null) {
 			spr.destroy();
 			spr = null;
-		}
-
-		if (col != null) {
-			col.destroy();
-			col = null;
 		}
 
 		level.removeEntity(this);

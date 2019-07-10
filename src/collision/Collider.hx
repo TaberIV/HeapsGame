@@ -1,19 +1,22 @@
 package collision;
 
+import entity.Entity;
+
 /**
 	Axis Aligned Bounding Box connected to Entity
 **/
 class Collider {
-	private var colSys:CollisionSystem;
-
-	private var xMin:Int;
-	private var yMin:Int;
-
-	private var xMax:Int;
-	private var yMax:Int;
-
 	private var xOrigin:Int;
 	private var yOrigin:Int;
+
+	private var ent:entity.Entity;
+	private var colSys:CollisionSystem;
+
+	public var xMin:Int;
+	public var yMin:Int;
+
+	public var xMax(default, null):Int;
+	public var yMax(default, null):Int;
 
 	public var x(get, set):Int;
 	public var y(get, set):Int;
@@ -21,10 +24,11 @@ class Collider {
 	public var width(get, null):Int;
 	public var height(get, null):Int;
 
-	public var solid(default, null):Bool;
+	public var active:Bool = true;
 
-	public function new(level:Level, x:Int, y:Int, width:Int, height:Int, solid:Bool, ?centered:Bool) {
-		colSys = level.col;
+	public function new(ent:Entity, x:Int, y:Int, width:Int, height:Int, ?centered:Bool = false) {
+		this.ent = ent;
+		colSys = ent.level.col;
 
 		xOrigin = centered ? Std.int(width >> 1) : 0;
 		yOrigin = centered ? Std.int(height >> 1) : 0;
@@ -34,11 +38,6 @@ class Collider {
 
 		xMax = xMin + width;
 		yMax = yMin + height;
-
-		this.solid = solid;
-		if (solid) {
-			colSys.addSolid(this);
-		}
 	}
 
 	public inline function intersects(c:Collider) {
@@ -83,6 +82,10 @@ class Collider {
 		return collide;
 	}
 
+	public function getOverlapingActors() {
+		return colSys.getOverlappingActors(this);
+	}
+
 	inline function get_x() {
 		return xMin + xOrigin;
 	}
@@ -114,8 +117,6 @@ class Collider {
 	}
 
 	public function destroy():Void {
-		if (solid) {
-			colSys.removeSolid(this);
-		}
+		ent = null;
 	}
 }

@@ -6,6 +6,8 @@ import entity.solid.Solid;
 	Actors are Entities that move and collide with solids.
 **/
 class Actor extends Entity {
+	public var col:collision.Collider;
+
 	public function moveX(amount:Float, ?action:() -> Void) {
 		xRemainder += amount;
 		var move:Int = Math.round(xRemainder);
@@ -24,11 +26,11 @@ class Actor extends Entity {
 					move -= sign;
 				} else {
 					// Collision with solid
-					move = 0;
-
 					if (action != null) {
 						action();
 					}
+
+					move = 0;
 				}
 			}
 		}
@@ -68,5 +70,10 @@ class Actor extends Entity {
 
 	public function squish():Void {
 		destroy();
+	}
+
+	override function destroy() {
+		super.destroy();
+		col.destroy();
 	}
 }
