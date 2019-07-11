@@ -46,7 +46,9 @@ class Player extends Actor {
 
 	public override function update(dt:Float):Void {
 		// * Horizontal velocity
-		velX = controller.xAxis * moveSpeed;
+		if (isGrounded() || controller.xAxis != 0) {
+			velX = controller.xAxis * moveSpeed;
+		}
 
 		// * Verticle velocity
 		var yAcc = accelerateY(dt);
@@ -63,6 +65,12 @@ class Player extends Actor {
 		if (isGrounded() && controller.jumpPressed) {
 			velY = jumpVelocity;
 			yAcc = 0;
+
+			if (lastRide != null && isRiding(lastRide)) {
+				velX += lastRide.velX;
+				velY += lastRide.velY;
+				lastRide = null;
+			}
 		}
 
 		return yAcc;

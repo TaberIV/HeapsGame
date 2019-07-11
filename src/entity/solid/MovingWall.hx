@@ -9,6 +9,9 @@ class MovingWall extends Wall {
 
 		this.xSpeed = xSpeed;
 		this.ySpeed = ySpeed;
+
+		velX = xSpeed;
+		velY = ySpeed;
 	}
 
 	public override function update(dt:Float) {
