@@ -24,4 +24,10 @@ class Math {
 	public inline static function calcMovement(velocity:Float, dt:Float, acceleration:Float) {
 		return velocity * dt + 0.5 * acceleration * dt * dt;
 	}
+
+	public static function approach(value:Float, target:Float, increment:Float):Float {
+		var diff = target - value;
+
+		return std.Math.abs(diff) < increment ? target : value + increment * sign(diff);
+	}
 }
