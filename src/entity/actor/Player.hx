@@ -15,7 +15,7 @@ class Player extends Actor {
 	// Movement parameters
 	private var moveSpeed:Float = 200;
 	private var accelTime:Float = 0.2;
-	private var deccelTime:Float = 0;
+	private var deccelTime:Float = 0.01;
 
 	private var jumpDist:Float = 200;
 	private var jumpHeight:Float = 150;
@@ -67,22 +67,26 @@ class Player extends Actor {
 	}
 
 	private function accelerateX(dt:Float):Float {
+		var accX:Float = 0;
 		var mult:Float = isGrounded() ? 1 : airMobility;
 
 		// Friction
-		if (isGrounded()) {
+		if (isGrounded() && velX != 0) {
 			if (sign(controller.xAxis) != sign(velX)) {
+				accX += -sign(velX) * friction;
 				velX = approach(velX, 0, friction * dt);
 			} else if (Math.abs(velX) > moveSpeed) {
+				accX += -sign(velX) * runReduce;
 				velX = approach(velX, sign(velX) * moveSpeed, runReduce * dt);
 			}
 		}
 
 		if (controller.xAxis != 0) {
+			accX += sign(controller.xAxis) * moveForce * mult;
 			velX = approach(velX, moveSpeed * controller.xAxis, moveForce * mult * dt);
 		}
 
-		return 0;
+		return accX;
 	}
 
 	private function accelerateY(dt:Float):Float {
