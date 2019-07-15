@@ -14,7 +14,7 @@ class Player extends Actor {
 
 	// Movement parameters
 	private var moveSpeed:Float = 350;
-	private var accelTime:Float = 0.2;
+	private var accelTime:Float = 0.01;
 	private var deccelTime:Float = 0.1;
 
 	private var jumpDist:Float = 350;
@@ -86,7 +86,7 @@ class Player extends Actor {
 		var mult:Float = onGround ? 1 : airMobility;
 
 		// Friction
-		if (onGround && sign(controller.xAxis) != sign(velX)) {
+		if ((onGround || !Math.isFinite(friction)) && sign(controller.xAxis) != sign(velX)) {
 			velX = approach(velX, 0, friction * dt);
 		}
 
