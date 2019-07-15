@@ -40,8 +40,8 @@ class Player extends Actor {
 
 	// Collision state
 	private var ride:Solid;
-	private var colX:Bool;
-	private var colY:Bool;
+	private var colX:Solid;
+	private var colY:Solid;
 
 	// References
 	private var controller:PlayerController;
@@ -128,12 +128,12 @@ class Player extends Actor {
 
 	private function onColX(solid:Solid) {
 		velX = solid.velX;
-		colX = true;
+		colX = solid;
 	}
 
 	private function onColY(solid:Solid) {
 		velY = 0;
-		colY = true;
+		colY = solid;
 	}
 
 	public override function isRiding(solid:Solid):Bool {
