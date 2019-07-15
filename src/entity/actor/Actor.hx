@@ -8,9 +8,9 @@ import entity.solid.Solid;
 class Actor extends Entity {
 	private var lastRide:Solid;
 
-	public var col:collision.Collider;
+	public var col:collision.ActorCollider;
 
-	public function moveX(amount:Float, ?action:() -> Void) {
+	public function moveX(amount:Float, ?action:Solid->Void) {
 		xRemainder += amount;
 		var move:Int = Math.round(xRemainder);
 
@@ -20,7 +20,9 @@ class Actor extends Entity {
 
 			// Move and check for collision
 			while (move != 0) {
-				if (col == null || !col.collideAt(x + sign, y)) {
+				var solid = col.getSolidAt(x + sign, y);
+
+				if (solid == null) {
 					// No collision
 					x += sign;
 
@@ -28,7 +30,7 @@ class Actor extends Entity {
 				} else {
 					// Collision with solid
 					if (action != null) {
-						action();
+						action(solid);
 					}
 
 					move = 0;
@@ -37,7 +39,7 @@ class Actor extends Entity {
 		}
 	}
 
-	public function moveY(amount:Float, ?action:() -> Void) {
+	public function moveY(amount:Float, ?action:Solid->Void) {
 		yRemainder += amount;
 		var move:Int = Math.round(yRemainder);
 
@@ -47,7 +49,9 @@ class Actor extends Entity {
 
 			// Move and check for collision
 			while (move != 0) {
-				if (col == null || !col.collideAt(x, y + sign)) {
+				var solid = col.getSolidAt(x, y + sign);
+
+				if (solid == null) {
 					// No collision
 					y += sign;
 
@@ -57,7 +61,7 @@ class Actor extends Entity {
 					move = 0;
 
 					if (action != null) {
-						action();
+						action(solid);
 					}
 				}
 			}
@@ -68,7 +72,7 @@ class Actor extends Entity {
 		return false;
 	}
 
-	public function squish():Void {
+	public function squish(solid:Solid):Void {
 		destroy();
 	}
 
