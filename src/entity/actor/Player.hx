@@ -65,14 +65,14 @@ class Player extends Actor {
 	}
 
 	public override function update(dt:Float):Void {
-		// * Set frame constants
+		// Set frame constants
 		onGround = checkGrounded();
 
-		// * Acceleration
+		// Acceleration
 		var accX = accelerateX(dt);
 		var accY = accelerateY(dt);
 
-		// * Move
+		// Move
 		moveX(calcMovement(velX, dt, accX), onColX);
 		moveY(calcMovement(velY, dt, accY), onColY);
 
