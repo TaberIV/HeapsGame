@@ -55,22 +55,6 @@ class Collider {
 		return pointsIntersects(xMin, yMin, xMax, yMax, c);
 	}
 
-	public function collideAt(x:Int, y:Int) {
-		var xMin = x - xOrigin;
-		var yMin = y - yOrigin;
-
-		var xMax = xMin + width;
-		var yMax = yMin + height;
-
-		for (solid in colSys.solids) {
-			if (solid.col.active && pointsIntersects(xMin, yMin, xMax, yMax, solid.col)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	public function getOverlapingActors() {
 		return colSys.getOverlappingActors(this);
 	}

@@ -12,6 +12,26 @@ class ActorCollider extends Collider {
 		colSys.addActor(actor);
 	}
 
+	public function getSolidAt(x:Int, y:Int):entity.solid.Solid {
+		var xMin = x - xOrigin;
+		var yMin = y - yOrigin;
+
+		var xMax = xMin + width;
+		var yMax = yMin + height;
+
+		for (solid in colSys.solids) {
+			if (solid.col.active && Collider.pointsIntersects(xMin, yMin, xMax, yMax, solid.col)) {
+				return solid;
+			}
+		}
+
+		return null;
+	}
+
+	public function collideAt(x:Int, y:Int):Bool {
+		return getSolidAt(x, y) != null;
+	}
+
 	public override function destroy() {
 		colSys.removeActor(actor);
 	}

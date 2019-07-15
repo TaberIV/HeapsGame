@@ -126,12 +126,12 @@ class Player extends Actor {
 		return col.collideAt(x, y + 1);
 	}
 
-	private function onColX() {
-		velX = 0;
+	private function onColX(solid:Solid) {
+		velX = solid.velX;
 		colX = true;
 	}
 
-	private function onColY() {
+	private function onColY(solid:Solid) {
 		velY = 0;
 		colY = true;
 	}
