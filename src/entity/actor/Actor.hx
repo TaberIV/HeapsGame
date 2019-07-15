@@ -68,10 +68,6 @@ class Actor extends Entity {
 		return false;
 	}
 
-	public function setRiding(solid:Solid):Void {
-		lastRide = solid;
-	}
-
 	public function squish():Void {
 		destroy();
 	}

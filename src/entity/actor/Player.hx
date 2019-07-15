@@ -15,7 +15,7 @@ class Player extends Actor {
 	// Movement parameters
 	private var moveSpeed:Float = 350;
 	private var accelTime:Float = 0.2;
-	private var deccelTime:Float = 0.1;
+	private var deccelTime:Float = 0.2;
 
 	private var jumpDist:Float = 350;
 	private var jumpHeight:Float = 150;
@@ -35,6 +35,7 @@ class Player extends Actor {
 	private var velX:Float;
 	private var velY:Float;
 	private var fastFall:Bool;
+	private var ride:Solid;
 
 	// References
 	private var controller:PlayerController;
@@ -94,11 +95,11 @@ class Player extends Actor {
 			velY = jumpVelocity;
 			accY = 0;
 
-			if (lastRide != null && isRiding(lastRide)) {
-				velX += lastRide.velX;
-				velY += lastRide.velY;
+			if (ride != null && isRiding(ride)) {
+				velX += ride.velX;
+				velY += ride.velY;
 			}
-			lastRide = null;
+			ride = null;
 		}
 
 		return accY;
@@ -125,16 +126,14 @@ class Player extends Actor {
 	}
 
 	public override function isRiding(solid:Solid):Bool {
-		return col.intersectsAt(solid.col, x, y + 1);
-	}
+		var riding = col.intersectsAt(solid.col, x, y + 1);
 
-	public override function setRiding(solid:Solid) {
-		if (lastRide != solid) {
+		if (riding && ride != solid) {
 			velX -= solid.velX;
-			velY -= solid.velY;
+			ride = solid;
 		}
 
-		super.setRiding(solid);
+		return riding;
 	}
 
 	public override function destroy() {
