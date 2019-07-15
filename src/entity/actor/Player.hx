@@ -15,7 +15,7 @@ class Player extends Actor {
 	// Movement parameters
 	private var moveSpeed:Float = 350;
 	private var accelTime:Float = 0.2;
-	private var deccelTime:Float = 0.2;
+	private var deccelTime:Float = 0.1;
 
 	private var jumpDist:Float = 350;
 	private var jumpHeight:Float = 150;
@@ -55,6 +55,7 @@ class Player extends Actor {
 		// Determine movement values
 		moveForce = moveSpeed / accelTime;
 		friction = moveSpeed / deccelTime;
+		runReduce = friction / 5;
 
 		jumpVelocity = -2 * jumpHeight * moveSpeed / (jumpDist / 2);
 		gravity = 2 * jumpHeight * moveSpeed * moveSpeed / (jumpDist * jumpDist / 4);
@@ -80,15 +81,16 @@ class Player extends Actor {
 		var mult:Float = isGrounded() ? 1 : airMobility;
 
 		// Friction
-		if (isGrounded() && velX != 0) {
-			if (sign(controller.xAxis) != sign(velX)) {
-				velX = approach(velX, 0, friction * dt);
-			} else if (Math.abs(velX) > moveSpeed) {
-				velX = approach(velX, sign(velX) * moveSpeed, runReduce * dt);
-			}
+		if (isGrounded() && sign(controller.xAxis) != sign(velX)) {
+			velX = approach(velX, 0, friction * dt);
 		}
 
-		if (controller.xAxis != 0) {
+		// Reduce back if over run speed
+		if (sign(controller.xAxis) == sign(velX) && Math.abs(velX) > moveSpeed) {
+			if (isGrounded()) {
+				velX = approach(velX, sign(velX) * moveSpeed, runReduce * dt);
+			}
+		} else if (controller.xAxis != 0) {
 			velX = approach(velX, moveSpeed * controller.xAxis, moveForce * mult * dt);
 		}
 
