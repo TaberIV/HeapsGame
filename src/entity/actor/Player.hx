@@ -14,8 +14,8 @@ class Player extends Actor {
 
 	// Movement parameters
 	private var moveSpeed:Float = 350;
-	private var accelTime:Float = 0.01;
-	private var deccelTime:Float = 0.1;
+	private var accelTime:Float = 0.1;
+	private var deccelTime:Float = 0.05;
 
 	private var jumpDist:Float = 350;
 	private var jumpHeight:Float = 150;

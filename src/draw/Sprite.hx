@@ -12,8 +12,10 @@ class Sprite extends h2d.Object {
 	}
 
 	override private function draw(ctx:h2d.RenderContext) {
-		x = ent.x;
-		y = ent.y;
+		if (x != ent.x || y != ent.y) {
+			x = ent.x;
+			y = ent.y;
+		}
 
 		super.draw(ctx);
 	}
