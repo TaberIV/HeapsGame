@@ -72,7 +72,7 @@ class Actor extends Entity {
 		return false;
 	}
 
-	public function squish(solid:Solid):Void {
+	public function squish(?solid:Solid):Void {
 		destroy();
 	}
 
