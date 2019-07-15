@@ -1,5 +1,3 @@
-import entity.Entity;
-
 class Game extends hxd.App {
 	var level:Level;
 
