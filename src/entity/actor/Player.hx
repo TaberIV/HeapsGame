@@ -35,7 +35,11 @@ class Player extends Actor {
 	private var velX:Float;
 	private var velY:Float;
 	private var fastFall:Bool;
+
+	// Collision state
 	private var ride:Solid;
+	private var colX:Bool;
+	private var colY:Bool;
 
 	// References
 	private var controller:PlayerController;
@@ -63,8 +67,12 @@ class Player extends Actor {
 		var accY = accelerateY(dt);
 
 		// * Move
-		moveX(calcMovement(velX, dt, accX), colX);
-		moveY(calcMovement(velY, dt, accY), colY);
+		moveX(calcMovement(velX, dt, accX), onColX);
+		moveY(calcMovement(velY, dt, accY), onColY);
+
+		if (ride != null && !isRiding(ride)) {
+			releaseRide();
+		}
 	}
 
 	private function accelerateX(dt:Float):Float {
@@ -94,12 +102,6 @@ class Player extends Actor {
 		if (isGrounded() && controller.jumpPressed) {
 			velY = jumpVelocity;
 			accY = 0;
-
-			if (ride != null && isRiding(ride)) {
-				velX += ride.velX;
-				velY += ride.velY;
-			}
-			ride = null;
 		}
 
 		return accY;
@@ -117,12 +119,14 @@ class Player extends Actor {
 		return col.collideAt(x, y + 1);
 	}
 
-	private function colX() {
+	private function onColX() {
 		velX = 0;
+		colX = true;
 	}
 
-	private function colY() {
+	private function onColY() {
 		velY = 0;
+		colY = true;
 	}
 
 	public override function isRiding(solid:Solid):Bool {
@@ -134,6 +138,12 @@ class Player extends Actor {
 		}
 
 		return riding;
+	}
+
+	public function releaseRide() {
+		velX += ride.velX;
+		velY += ride.velY;
+		ride = null;
 	}
 
 	public override function destroy() {
