@@ -36,6 +36,8 @@ class Player extends Actor {
 	private var velY:Float;
 	private var fastFall:Bool;
 
+	private var onGround:Bool;
+
 	// Collision state
 	private var ride:Solid;
 	private var colX:Bool;
@@ -63,6 +65,9 @@ class Player extends Actor {
 	}
 
 	public override function update(dt:Float):Void {
+		// * Set frame constants
+		onGround = checkGrounded();
+
 		// * Acceleration
 		var accX = accelerateX(dt);
 		var accY = accelerateY(dt);
@@ -78,16 +83,16 @@ class Player extends Actor {
 
 	private function accelerateX(dt:Float):Float {
 		var accX:Float = 0;
-		var mult:Float = isGrounded() ? 1 : airMobility;
+		var mult:Float = onGround ? 1 : airMobility;
 
 		// Friction
-		if (isGrounded() && sign(controller.xAxis) != sign(velX)) {
+		if (onGround && sign(controller.xAxis) != sign(velX)) {
 			velX = approach(velX, 0, friction * dt);
 		}
 
 		// Reduce back if over run speed
 		if (sign(controller.xAxis) == sign(velX) && Math.abs(velX) > moveSpeed) {
-			if (isGrounded()) {
+			if (onGround) {
 				velX = approach(velX, sign(velX) * moveSpeed, runReduce * dt);
 			}
 		} else if (controller.xAxis != 0) {
@@ -101,7 +106,7 @@ class Player extends Actor {
 		var accY = applyGravity(dt);
 
 		// Jump
-		if (isGrounded() && controller.jumpPressed) {
+		if (onGround && controller.jumpPressed) {
 			velY = jumpVelocity;
 			accY = 0;
 		}
@@ -117,7 +122,7 @@ class Player extends Actor {
 		return grav;
 	}
 
-	private function isGrounded() {
+	private function checkGrounded() {
 		return col.collideAt(x, y + 1);
 	}
 
