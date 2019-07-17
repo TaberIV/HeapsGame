@@ -16,4 +16,19 @@ class PlayerPad extends PadController implements PlayerController {
 	function get_jumpPressed() {
 		return pad.isPressed(Pad.DEFAULT_CONFIG.A);
 	}
+
+	private override function get_xAxis() {
+		var xAxis = super.get_xAxis();
+
+		if (xAxis == 0) {
+			if (pad.isDown(Pad.DEFAULT_CONFIG.dpadLeft)) {
+				xAxis -= 1;
+			}
+			if (pad.isDown(Pad.DEFAULT_CONFIG.dpadRight)) {
+				xAxis += 1;
+			}
+		}
+
+		return xAxis;
+	}
 }
