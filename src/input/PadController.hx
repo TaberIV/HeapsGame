@@ -41,6 +41,5 @@ class PadController {
 	private function onPadConnect(gp:Pad) {
 		// Connect pad
 		pad = gp;
-		trace("Connected");
 	}
 }
