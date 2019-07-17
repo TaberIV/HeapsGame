@@ -52,7 +52,7 @@ class Player extends Actor {
 		col = new collision.ActorCollider(this, width, height);
 
 		// Create input controller
-		controller = new PlayerKeyboard();
+		controller = new PlayerAdditive();
 
 		// Determine movement values
 		moveForce = moveSpeed / accelTime;
