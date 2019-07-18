@@ -15,7 +15,7 @@
 			],
 			"lines": [
 				{
-					"id": "No",
+					"id": "no",
 					"icon": {
 						"file": "collision.png",
 						"size": 32,
@@ -24,7 +24,7 @@
 					}
 				},
 				{
-					"id": "Full",
+					"id": "full",
 					"icon": {
 						"file": "collision.png",
 						"size": 32,
@@ -69,7 +69,7 @@
 			"props": {}
 		},
 		{
-			"name": "World1",
+			"name": "levels",
 			"columns": [
 				{
 					"name": "id",
@@ -158,7 +158,7 @@
 			}
 		},
 		{
-			"name": "World1@tileProps",
+			"name": "levels@tileProps",
 			"props": {
 				"hide": true
 			},
@@ -167,7 +167,7 @@
 			"columns": []
 		},
 		{
-			"name": "World1@layers",
+			"name": "levels@layers",
 			"props": {
 				"hide": true
 			},
@@ -189,7 +189,7 @@
 			]
 		},
 		{
-			"name": "World1@entities",
+			"name": "levels@entities",
 			"props": {
 				"hide": true
 			},
