@@ -5,8 +5,7 @@
 			"columns": [
 				{
 					"typeStr": "0",
-					"name": "id",
-					"display": null
+					"name": "id"
 				},
 				{
 					"typeStr": "14",
@@ -32,13 +31,45 @@
 						"x": 1,
 						"y": 0
 					}
-				},
+				}
 			],
 			"separators": [],
 			"props": {}
 		},
 		{
-			"name": "level",
+			"name": "entities",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id"
+				},
+				{
+					"typeStr": "1",
+					"name": "name",
+					"display": null
+				},
+				{
+					"typeStr": "14",
+					"name": "img"
+				}
+			],
+			"lines": [
+				{
+					"id": "player",
+					"name": "player",
+					"img": {
+						"file": "player.png",
+						"size": 64,
+						"x": 0,
+						"y": 0
+					}
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "World1",
 			"columns": [
 				{
 					"name": "id",
@@ -66,39 +97,57 @@
 				},
 				{
 					"typeStr": "12:collision",
-					"name": "collision"
+					"name": "collision",
+					"display": null
+				},
+				{
+					"typeStr": "8",
+					"name": "entities"
 				}
 			],
 			"lines": [
 				{
 					"id": "test",
-					"width": 40,
-					"height": 30,
+					"width": 20,
+					"height": 15,
 					"tileProps": [],
 					"layers": [
 						{
-							"name": "ground",
+							"name": "background",
 							"data": null
 						}
 					],
+					"collision": "AQAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAAAABAQAAAAAAAAAAAAAAAAAAAAAAAAEBAAAAAAAAAAAAAAAAAAABAQEBAQEBAAAAAAAAAAAAAAAAAAAAAAAAAQEBAQAAAAAAAAAAAAAAAAAAAAABAQEBAAAAAAAAAAAAAAAAAAAAAAEBAQEBAQEBAQEBAQEBAQEBAAAA",
 					"props": {
 						"tileSize": 32,
 						"layers": [
 							{
 								"l": "collision",
 								"p": {
-									"alpha": 0.35
+									"alpha": 1
 								}
 							},
 							{
-								"l": "ground",
+								"l": "background",
+								"p": {
+									"alpha": 1
+								}
+							},
+							{
+								"l": "entities",
 								"p": {
 									"alpha": 1
 								}
 							}
 						]
 					},
-					"collision": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+					"entities": [
+						{
+							"x": 5,
+							"y": 13,
+							"kind": "player"
+						}
+					]
 				}
 			],
 			"separators": [],
@@ -109,7 +158,7 @@
 			}
 		},
 		{
-			"name": "level@tileProps",
+			"name": "World1@tileProps",
 			"props": {
 				"hide": true
 			},
@@ -118,12 +167,16 @@
 			"columns": []
 		},
 		{
-			"name": "level@layers",
+			"name": "World1@layers",
 			"props": {
 				"hide": true
 			},
 			"separators": [],
-			"lines": [],
+			"lines": [
+				{
+					"name": ""
+				}
+			],
 			"columns": [
 				{
 					"name": "name",
@@ -132,6 +185,30 @@
 				{
 					"name": "data",
 					"typeStr": "15"
+				}
+			]
+		},
+		{
+			"name": "World1@entities",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:entities",
+					"name": "kind",
+					"display": null
+				},
+				{
+					"typeStr": "3",
+					"name": "x"
+				},
+				{
+					"typeStr": "3",
+					"name": "y",
+					"display": null
 				}
 			]
 		}
