@@ -108,12 +108,12 @@
 					"tileProps": [],
 					"layers": [
 						{
-							"name": "background",
+							"name": "ground",
 							"data": {
-								"file": "collision.png",
+								"file": "DeepForestTileset.png",
 								"size": 32,
-								"stride": 2,
-								"data": "AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgACAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgACAAIAAgACAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgACAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgAAAAAAAAAAAAAA"
+								"stride": 8,
+								"data": "AwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQACAAIAHQAcAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAEgASABIACgAcAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoACgAcAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAoACgAcAAIAAgACAAIAAgACAAIAAgACAAIAAgBKAEoASgBKAEoA"
 							}
 						}
 					],
@@ -121,7 +121,7 @@
 						"tileSize": 32,
 						"layers": [
 							{
-								"l": "background",
+								"l": "ground",
 								"p": {
 									"alpha": 1
 								}
@@ -152,6 +152,93 @@
 							"sets": [],
 							"props": [
 								null,
+								{
+									"collision": "full"
+								}
+							]
+						},
+						"DeepForestTileset.png": {
+							"stride": 8,
+							"sets": [],
+							"props": [
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								{
+									"collision": "full"
+								},
+								null,
+								null,
+								null,
+								{
+									"collision": "full"
+								},
 								{
 									"collision": "full"
 								}
