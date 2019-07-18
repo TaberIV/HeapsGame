@@ -2,12 +2,14 @@ class Game extends hxd.App {
 	var level:Level;
 
 	override function init():Void {
-		setLevel(new Level(this));
+		hxd.Res.initLocal();
+		Data.load(hxd.Res.data.entry.getText());
+		setLevel(0);
 	}
 
-	function setLevel(level:Level):Void {
+	function setLevel(index:Int):Void {
+		this.level = new Level(this, 0);
 		setScene(level);
-		this.level = level;
 	}
 
 	override function update(dt:Float):Void {
