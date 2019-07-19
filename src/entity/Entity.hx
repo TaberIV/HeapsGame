@@ -19,6 +19,7 @@ class Entity {
 		set_y_Float(y);
 
 		this.level = level;
+		level.addEntity(this);
 
 		init();
 	}
