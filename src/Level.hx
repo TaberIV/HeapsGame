@@ -1,3 +1,4 @@
+import camera.Camera;
 import collision.*;
 import entity.Entity;
 
@@ -7,6 +8,7 @@ class Level extends h2d.Scene {
 	private var level:h2d.CdbLevel;
 
 	private var ents:Array<Entity>;
+	private var camera:Camera;
 
 	public var col:CollisionSystem;
 
@@ -25,10 +27,12 @@ class Level extends h2d.Scene {
 		col.buildLevel(colliders, level.width, level.height, data.props.tileSize);
 
 		// Create entities
+		camera = new Camera(this);
+
 		for (ent in data.entities) {
 			switch (ent.kindId) {
 				case Data.EntitiesKind.player:
-					new entity.actor.Player(this, ent.x * tileSize, ent.y * tileSize);
+					camera.entity = new entity.actor.Player(this, ent.x * tileSize, ent.y * tileSize);
 			}
 		}
 	}
@@ -45,5 +49,7 @@ class Level extends h2d.Scene {
 		for (ent in ents) {
 			ent.update(dt);
 		}
+
+		camera.update(dt);
 	}
 }
