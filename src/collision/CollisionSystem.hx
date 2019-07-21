@@ -45,6 +45,16 @@ class CollisionSystem {
 		}
 	}
 
+	public function pointsCollide(xMin:Int, yMin:Int, xMax:Int, yMax:Int) {
+		for (solid in solids) {
+			if (solid.col.active && Collider.pointsIntersects(xMin, yMin, xMax, yMax, solid.col)) {
+				return solid;
+			}
+		}
+
+		return null;
+	}
+
 	public function getOverlappingActors(c:Collider):Array<Actor> {
 		var oActors = new Array<Actor>();
 		for (a in actors) {

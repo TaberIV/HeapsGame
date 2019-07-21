@@ -21,19 +21,36 @@ class Level extends h2d.Scene {
 		ents = new Array<Entity>();
 		col = new collision.CollisionSystem(this);
 
+		init();
+	}
+
+	private function init() {
+		// Move foreground in front of entities
+		for (o in level.getLayer(1)) {
+			level.addChildAt(o, 2);
+		}
+
 		// Build level collision
-		var tileSize = data.props.tileSize;
-		var colliders = level.buildStringProperty("collision");
-		col.buildLevel(colliders, level.width, level.height, data.props.tileSize);
+		final tileSize = data.props.tileSize;
+		var colGrid = level.buildStringProperty("collision");
+		col.buildLevel(colGrid, level.width, level.height, data.props.tileSize);
 
 		// Create entities
-		camera = new Camera(this, data.width * tileSize, data.height * tileSize);
+		camera = new Camera(level, width, height, data.width * tileSize, data.height * tileSize);
 
 		for (ent in data.entities) {
 			switch (ent.kindId) {
 				case Data.EntitiesKind.player:
 					camera.entity = new entity.actor.Player(this, ent.x * tileSize, ent.y * tileSize);
 			}
+		}
+	}
+
+	public override function addChild(s:h2d.Object) {
+		if (level == null) {
+			super.addChild(s);
+		} else {
+			level.addChildAt(s, 1);
 		}
 	}
 

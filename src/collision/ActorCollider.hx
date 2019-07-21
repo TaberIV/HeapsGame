@@ -1,6 +1,7 @@
 package collision;
 
 import entity.actor.Actor;
+import entity.solid.Solid;
 
 class ActorCollider extends Collider {
 	private var actor:Actor;
@@ -12,20 +13,14 @@ class ActorCollider extends Collider {
 		colSys.addActor(actor);
 	}
 
-	public function getSolidAt(x:Int, y:Int):entity.solid.Solid {
+	public function getSolidAt(x:Int, y:Int):Solid {
 		var xMin = x - xOrigin;
 		var yMin = y - yOrigin;
 
 		var xMax = xMin + width;
 		var yMax = yMin + height;
 
-		for (solid in colSys.solids) {
-			if (solid.col.active && Collider.pointsIntersects(xMin, yMin, xMax, yMax, solid.col)) {
-				return solid;
-			}
-		}
-
-		return null;
+		return colSys.pointsCollide(xMin, yMin, xMax, yMax);
 	}
 
 	public function collideAt(x:Int, y:Int):Bool {

@@ -1,9 +1,10 @@
 package camera;
 
+import h2d.CdbLevel;
 import entity.Entity;
 
 class Camera {
-	private var level:Level;
+	private var level:CdbLevel;
 
 	private var x:Float;
 	private var y:Float;
@@ -18,10 +19,10 @@ class Camera {
 
 	public var entity:Entity;
 
-	public function new(level:Level, levelWidth:Int, levelHeight:Int) {
+	public function new(level:CdbLevel, width:Int, height:Int, levelWidth:Int, levelHeight:Int) {
 		this.level = level;
-		width = level.width;
-		height = level.height;
+		this.width = width;
+		this.height = height;
 
 		xMin = Std.int(width / 2);
 		yMin = Std.int(height / 2);
