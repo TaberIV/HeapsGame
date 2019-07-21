@@ -5,7 +5,7 @@ import entity.Entity;
 class Level extends h2d.Scene {
 	private var index:Int;
 	private var data:Data.Levels;
-	private var level:h2d.CdbLevel;
+	private var world:h2d.CdbLevel;
 
 	private var ents:Array<Entity>;
 	private var camera:Camera;
@@ -16,7 +16,7 @@ class Level extends h2d.Scene {
 		super();
 		this.index = index;
 		this.data = Data.levels.all[index];
-		this.level = new h2d.CdbLevel(Data.levels, index, this);
+		this.world = new h2d.CdbLevel(Data.levels, index, this);
 
 		ents = new Array<Entity>();
 		col = new collision.CollisionSystem(this);
@@ -26,17 +26,17 @@ class Level extends h2d.Scene {
 
 	private function init() {
 		// Move foreground in front of entities
-		for (o in level.getLayer(1)) {
-			level.addChildAt(o, 2);
+		for (o in world.getLayer(1)) {
+			world.addChildAt(o, 2);
 		}
 
-		// Build level collision
+		// Build world collision
 		final tileSize = data.props.tileSize;
-		var colGrid = level.buildStringProperty("collision");
-		col.buildLevel(colGrid, level.width, level.height, data.props.tileSize);
+		var colGrid = world.buildStringProperty("collision");
+		col.buildLevel(colGrid, world.width, world.height, data.props.tileSize);
 
 		// Create entities
-		camera = new Camera(level, width, height, data.width * tileSize, data.height * tileSize);
+		camera = new Camera(this, world.width * data.props.tileSize, world.height * data.props.tileSize);
 
 		for (ent in data.entities) {
 			switch (ent.kindId) {
@@ -47,10 +47,10 @@ class Level extends h2d.Scene {
 	}
 
 	public override function addChild(s:h2d.Object) {
-		if (level == null) {
+		if (world == null) {
 			super.addChild(s);
 		} else {
-			level.addChildAt(s, 1);
+			world.addChildAt(s, 1);
 		}
 	}
 
@@ -68,5 +68,10 @@ class Level extends h2d.Scene {
 		}
 
 		camera.update(dt);
+	}
+
+	public function setCameraPos(x:Int, y:Int) {
+		world.x = width / 2 - x;
+		world.y = height / 2 - y;
 	}
 }
