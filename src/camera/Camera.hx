@@ -1,6 +1,5 @@
 package camera;
 
-import Std.int;
 import entity.Entity;
 
 class Camera {
@@ -24,10 +23,10 @@ class Camera {
 		this.width = level.width;
 		this.height = level.height;
 
-		xMin = int(width / 2);
-		yMin = int(height / 2);
-		xMax = worldWidth - int(width / 2);
-		yMax = worldHeight - int(height / 2);
+		xMin = width >> 1;
+		yMin = height >> 1;
+		xMax = worldWidth - (width >> 1);
+		yMax = worldHeight - (height >> 1);
 	}
 
 	public function update(dt:Float) {

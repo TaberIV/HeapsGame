@@ -30,8 +30,8 @@ class Collider {
 		this.ent = ent;
 		colSys = ent.level.col;
 
-		xOrigin = centered ? Std.int(width >> 1) : 0;
-		yOrigin = centered ? Std.int(height >> 1) : 0;
+		xOrigin = centered ? width >> 1 : 0;
+		yOrigin = centered ? height >> 1 : 0;
 
 		this.width = width;
 		this.height = height;

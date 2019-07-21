@@ -4,12 +4,12 @@ import h2d.Object;
 import collision.*;
 import camera.Camera;
 import entity.Entity;
+import draw.Sprite;
 
 class Level extends Scene {
-	private var index:Int;
+	private var game:Game;
 	private var data:Data.Levels;
 	private var world:CdbLevel;
-
 	private var ents:Array<Entity>;
 	private var camera:Camera;
 
@@ -17,7 +17,7 @@ class Level extends Scene {
 
 	public function new(game:Game, index:Int) {
 		super();
-		this.index = index;
+		this.game = game;
 		this.data = Data.levels.all[index];
 		this.world = new CdbLevel(Data.levels, index, this);
 
@@ -28,18 +28,13 @@ class Level extends Scene {
 	}
 
 	private function init() {
-		// Move foreground in front of entities
-		for (o in world.getLayer(1)) {
-			world.addChildAt(o, 2);
-		}
-
 		// Build world collision
 		final tileSize = data.props.tileSize;
 		var colGrid = world.buildStringProperty("collision");
-		col.buildLevel(colGrid, world.width, world.height, data.props.tileSize);
+		col.buildLevel(colGrid, world.width, world.height, tileSize);
 
 		// Create entities
-		camera = new Camera(this, world.width * data.props.tileSize, world.height * data.props.tileSize);
+		camera = new Camera(this, world.width * tileSize, world.height * tileSize);
 
 		for (ent in data.entities) {
 			switch (ent.kindId) {
@@ -49,20 +44,17 @@ class Level extends Scene {
 		}
 	}
 
-	public override function addChild(s:Object) {
-		if (world == null) {
-			super.addChild(s);
-		} else {
-			world.addChildAt(s, 1);
-		}
-	}
-
 	public function addEntity(ent:Entity):Void {
 		ents.push(ent);
 	}
 
 	public function removeEntity(ent:Entity):Bool {
 		return ents.remove(ent);
+	}
+
+	public function addSprite(s:Sprite) {
+		world.addChildAt(s, 1);
+		world.under(s);
 	}
 
 	public function update(dt:Float):Void {
