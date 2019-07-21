@@ -27,7 +27,7 @@ class Level extends h2d.Scene {
 		col.buildLevel(colliders, level.width, level.height, data.props.tileSize);
 
 		// Create entities
-		camera = new Camera(this);
+		camera = new Camera(this, data.width * tileSize, data.height * tileSize);
 
 		for (ent in data.entities) {
 			switch (ent.kindId) {

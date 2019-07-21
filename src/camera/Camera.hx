@@ -11,21 +11,31 @@ class Camera {
 	private var width:Int;
 	private var height:Int;
 
+	private var xMin:Int;
+	private var yMin:Int;
+	private var xMax:Int;
+	private var yMax:Int;
+
 	public var entity:Entity;
 
-	public function new(level:Level) {
+	public function new(level:Level, levelWidth:Int, levelHeight:Int) {
 		this.level = level;
-		this.width = level.width;
-		this.height = level.height;
+		width = level.width;
+		height = level.height;
+
+		xMin = Std.int(width / 2);
+		yMin = Std.int(height / 2);
+		xMax = levelWidth - Std.int(width / 2);
+		yMax = levelHeight - Std.int(height / 2);
 	}
 
 	public function update(dt:Float) {
 		if (entity != null) {
-			x = entity.x;
-			y = entity.y;
+			x = util.Math.clamp(entity.x, xMin, xMax);
+			y = util.Math.clamp(entity.y, yMin, yMax);
 
 			level.x = width / 2 - x;
-			level.y = height / 1.8 - y;
+			level.y = height / 2 - y;
 		}
 	}
 }
