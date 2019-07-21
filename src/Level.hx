@@ -1,11 +1,14 @@
-import camera.Camera;
+import h2d.Scene;
+import h2d.CdbLevel;
+import h2d.Object;
 import collision.*;
+import camera.Camera;
 import entity.Entity;
 
-class Level extends h2d.Scene {
+class Level extends Scene {
 	private var index:Int;
 	private var data:Data.Levels;
-	private var world:h2d.CdbLevel;
+	private var world:CdbLevel;
 
 	private var ents:Array<Entity>;
 	private var camera:Camera;
@@ -16,7 +19,7 @@ class Level extends h2d.Scene {
 		super();
 		this.index = index;
 		this.data = Data.levels.all[index];
-		this.world = new h2d.CdbLevel(Data.levels, index, this);
+		this.world = new CdbLevel(Data.levels, index, this);
 
 		ents = new Array<Entity>();
 		col = new collision.CollisionSystem(this);
@@ -46,7 +49,7 @@ class Level extends h2d.Scene {
 		}
 	}
 
-	public override function addChild(s:h2d.Object) {
+	public override function addChild(s:Object) {
 		if (world == null) {
 			super.addChild(s);
 		} else {

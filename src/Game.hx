@@ -1,9 +1,12 @@
-class Game extends hxd.App {
+import hxd.App;
+import hxd.Res;
+
+class Game extends App {
 	var level:Level;
 
 	override function init():Void {
-		hxd.Res.initLocal();
-		Data.load(hxd.Res.data.entry.getText());
+		Res.initLocal();
+		Data.load(Res.data.entry.getText());
 		setLevel(0);
 	}
 

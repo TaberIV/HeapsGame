@@ -31,7 +31,7 @@ class PadController {
 	}
 
 	public function new(?deadzone:Float = 0.25, ?outterDeadzone = 0.95) {
-		pad = hxd.Pad.createDummy();
+		pad = Pad.createDummy();
 		Pad.wait(onPadConnect);
 
 		this.deadzone = deadzone;
