@@ -1,25 +1,26 @@
-import h2d.Scene;
 import h2d.CdbLevel;
-import h2d.Object;
 import collision.*;
 import camera.Camera;
 import entity.Entity;
 import draw.Sprite;
 
-class Level extends Scene {
-	private var game:Game;
+class Level extends CdbLevel {
+	private var scene:LevelScene;
 	private var data:Data.Levels;
-	private var world:CdbLevel;
+
 	private var ents:Array<Entity>;
 	private var camera:Camera;
 
+	private var heightPx:Int;
+	private var widthPx:Int;
+
 	public var col:CollisionSystem;
 
-	public function new(game:Game, index:Int) {
-		super();
-		this.game = game;
+	public function new(scene:LevelScene, index:Int) {
+		super(Data.levels, index, scene);
+
+		this.scene = scene;
 		this.data = Data.levels.all[index];
-		this.world = new CdbLevel(Data.levels, index, this);
 
 		ents = new Array<Entity>();
 		col = new collision.CollisionSystem(this);
@@ -28,14 +29,18 @@ class Level extends Scene {
 	}
 
 	private function init() {
-		// Build world collision
-		final tileSize = data.props.tileSize;
-		var colGrid = world.buildStringProperty("collision");
-		col.buildLevel(colGrid, world.width, world.height, tileSize);
+		final tileSize = level.props.tileSize;
+		heightPx = height * tileSize;
+		widthPx = width * tileSize;
+
+		// Build collision
+		var colGrid = buildStringProperty("collision");
+		col.buildLevel(colGrid, width, height, tileSize);
+
+		// Camera
+		camera = new Camera(this, scene.width, scene.height, widthPx, heightPx);
 
 		// Create entities
-		camera = new Camera(this, world.width * tileSize, world.height * tileSize);
-
 		for (ent in data.entities) {
 			switch (ent.kindId) {
 				case Data.EntitiesKind.player:
@@ -53,8 +58,8 @@ class Level extends Scene {
 	}
 
 	public function addSprite(s:Sprite) {
-		world.addChildAt(s, 1);
-		world.under(s);
+		addChildAt(s, 1);
+		under(s);
 	}
 
 	public function update(dt:Float):Void {
@@ -66,7 +71,7 @@ class Level extends Scene {
 	}
 
 	public function setCameraPos(x:Int, y:Int) {
-		world.x = width / 2 - x;
-		world.y = height / 2 - y;
+		this.x = (scene.width >> 1) - x;
+		this.y = (scene.height >> 1) - y;
 	}
 }

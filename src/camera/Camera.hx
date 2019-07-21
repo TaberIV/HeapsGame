@@ -18,10 +18,10 @@ class Camera {
 
 	public var entity:Entity;
 
-	public function new(level:Level, worldWidth:Int, worldHeight:Int) {
+	public function new(level:Level, viewWidth:Int, viewHeight:Int, worldWidth:Int, worldHeight:Int) {
 		this.level = level;
-		this.width = level.width;
-		this.height = level.height;
+		this.width = viewWidth;
+		this.height = viewHeight;
 
 		xMin = width >> 1;
 		yMin = height >> 1;

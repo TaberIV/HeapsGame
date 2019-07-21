@@ -2,7 +2,7 @@ import hxd.App;
 import hxd.Res;
 
 class Game extends App {
-	var level:Level;
+	var level:LevelScene;
 
 	override function init():Void {
 		Res.initLocal();
@@ -11,7 +11,7 @@ class Game extends App {
 	}
 
 	function setLevel(index:Int):Void {
-		this.level = new Level(this, 0);
+		this.level = new LevelScene(this, 0);
 		setScene(level);
 	}
 
