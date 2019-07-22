@@ -14,8 +14,8 @@ class Player extends Actor {
 
 	// Movement parameters
 	private var moveSpeed:Float = 350;
-	private var accelTime:Float = 0.1;
-	private var deccelTime:Float = 0.05;
+	private var accelTime:Float = 0.3;
+	private var deccelTime:Float = 0.1;
 
 	private var jumpDist:Float = 320;
 	private var jumpHeight:Float = 150;
@@ -110,7 +110,14 @@ class Player extends Actor {
 		// Jump
 		if (onGround && controller.jumpPressed) {
 			velY = jumpVelocity;
-			velX += sign(controller.xAxis) * jumpBoost;
+
+			// Jump boost
+			if (Math.abs(velX) > moveSpeed && sign(controller.xAxis) == sign(velX)) {
+				velX = sign(velX) * Math.max(Math.abs(velX), moveSpeed + jumpBoost);
+			} else {
+				velX += sign(controller.xAxis) * jumpBoost;
+			}
+
 			accY = 0;
 		}
 
