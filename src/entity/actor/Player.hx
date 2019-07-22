@@ -17,10 +17,11 @@ class Player extends Actor {
 	private var accelTime:Float = 0.1;
 	private var deccelTime:Float = 0.05;
 
-	private var jumpDist:Float = 350;
+	private var jumpDist:Float = 320;
 	private var jumpHeight:Float = 150;
 	private var jumpHeightMod:Float = 0.4;
 	private var airMobility:Float = 0.5;
+	private var jumpBoost:Float = 50;
 
 	// Determined movement values
 	private var moveForce:Float;
@@ -59,8 +60,9 @@ class Player extends Actor {
 		friction = moveSpeed / deccelTime;
 		runReduce = friction / 5;
 
-		jumpVelocity = -2 * jumpHeight * moveSpeed / (jumpDist / 2);
-		gravity = 2 * jumpHeight * moveSpeed * moveSpeed / (jumpDist * jumpDist / 4);
+		var horSpeed = moveSpeed + jumpBoost;
+		jumpVelocity = -2 * jumpHeight * horSpeed / (jumpDist / 2);
+		gravity = 2 * jumpHeight * horSpeed * horSpeed / (jumpDist * jumpDist / 4);
 		fastGravity = gravity / jumpHeightMod;
 	}
 
@@ -108,6 +110,7 @@ class Player extends Actor {
 		// Jump
 		if (onGround && controller.jumpPressed) {
 			velY = jumpVelocity;
+			velX += sign(controller.xAxis) * jumpBoost;
 			accY = 0;
 		}
 

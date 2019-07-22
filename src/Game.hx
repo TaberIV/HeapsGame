@@ -11,7 +11,7 @@ class Game extends App {
 	}
 
 	function setLevel(index:Int):Void {
-		this.level = new LevelScene(this, 0);
+		this.level = new LevelScene(this, index);
 		setScene(level);
 	}
 
