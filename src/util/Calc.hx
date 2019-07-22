@@ -3,7 +3,7 @@ package util;
 /**
 	Useful Math operations.
 **/
-class Math {
+class Calc {
 	/**
 		Returns -1 if `num` is negative, 1 if positive, and 0 if 0.
 	**/
@@ -15,7 +15,7 @@ class Math {
 		Returns closest value to `num` that is between `min` and `max`
 	**/
 	public inline static function clamp(num:Float, min:Float, max:Float) {
-		return std.Math.min(std.Math.max(num, min), max);
+		return Math.min(Math.max(num, min), max);
 	}
 
 	/**
@@ -32,10 +32,18 @@ class Math {
 	public static function approach(value:Float, target:Float, increment:Float):Float {
 		var diff = target - value;
 
-		return std.Math.abs(diff) < increment ? target : value + increment * sign(diff);
+		return Math.abs(diff) < increment ? target : value + increment * sign(diff);
 	}
 
 	public static function absMax(val1:Float, val2:Float) {
-		return std.Math.abs(val1) > std.Math.abs(val2) ? val1 : val2;
+		return Math.abs(val1) > Math.abs(val2) ? val1 : val2;
+	}
+
+	public static function absMin(val1:Float, val2:Float) {
+		return Math.abs(val1) < Math.abs(val2) ? val1 : val2;
+	}
+
+	public static function absClamp(num:Float, min:Float, max:Float) {
+		return sign(num) * clamp(Math.abs(num), min, max);
 	}
 }

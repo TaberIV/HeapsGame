@@ -17,7 +17,7 @@ class Actor extends Entity {
 
 		if (move != 0) {
 			xRemainder -= move;
-			var sign:Int = util.Math.sign(move);
+			var sign:Int = util.Calc.sign(move);
 
 			// Move and check for collision
 			while (move != 0) {
@@ -46,7 +46,7 @@ class Actor extends Entity {
 
 		if (move != 0) {
 			yRemainder -= move;
-			var sign:Int = util.Math.sign(move);
+			var sign:Int = util.Calc.sign(move);
 
 			// Move and check for collision
 			while (move != 0) {

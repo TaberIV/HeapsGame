@@ -2,7 +2,7 @@ package entity.actor;
 
 import entity.solid.Solid;
 import input.player.*;
-import util.Math.*;
+import util.Calc.*;
 
 /**
 	Player controlled Actor.

@@ -31,8 +31,8 @@ class Camera {
 
 	public function update(dt:Float) {
 		if (entity != null) {
-			x = util.Math.clamp(entity.x, xMin, xMax);
-			y = util.Math.clamp(entity.y, yMin, yMax);
+			x = util.Calc.clamp(entity.x, xMin, xMax);
+			y = util.Calc.clamp(entity.y, yMin, yMax);
 
 			level.setCameraPos(Math.round(x), Math.round(y));
 		}

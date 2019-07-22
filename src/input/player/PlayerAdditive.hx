@@ -11,11 +11,11 @@ class PlayerAdditive implements PlayerController {
 	private var pad:PlayerPad;
 
 	private function get_xAxis() {
-		return util.Math.absMax(key.xAxis, pad.xAxis);
+		return util.Calc.absMax(key.xAxis, pad.xAxis);
 	}
 
 	private function get_yAxis() {
-		return util.Math.absMax(key.xAxis, pad.xAxis);
+		return util.Calc.absMax(key.xAxis, pad.xAxis);
 	}
 
 	private function get_jumpDown() {

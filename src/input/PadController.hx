@@ -14,7 +14,7 @@ class PadController {
 		if (Math.abs(pad.xAxis) < deadzone) {
 			return 0;
 		} else if (Math.abs(pad.xAxis) > outterDeadzone) {
-			return util.Math.sign(pad.xAxis);
+			return util.Calc.sign(pad.xAxis);
 		} else {
 			return pad.xAxis;
 		}
@@ -24,7 +24,7 @@ class PadController {
 		if (Math.abs(pad.yAxis) < deadzone) {
 			return 0;
 		} else if (Math.abs(pad.yAxis) > outterDeadzone) {
-			return util.Math.sign(pad.yAxis);
+			return util.Calc.sign(pad.yAxis);
 		} else {
 			return pad.yAxis;
 		}
