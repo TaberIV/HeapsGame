@@ -1,14 +1,14 @@
 {
   "name": "taber",
-  "url": "https://github.com/TaberIV/apple/",
+  "url": "https://github.com/TaberIV/myHeapsLib/",
   "license": "MIT",
   "tags": [],
   "description": "Game framework",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "dependencies": {
     "heaps": "",
     "castle": ""
   },
-  "releasenote": "Still working on it...",
+  "releasenote": "Library for making games with Heaps",
   "contributors": ["Taber"]
 }
