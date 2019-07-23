@@ -1,0 +1,14 @@
+{
+  "name": "taber",
+  "url": "https://github.com/TaberIV/apple/",
+  "license": "MIT",
+  "tags": [],
+  "description": "Game framework",
+  "version": "0.1.0",
+  "dependencies": {
+    "heaps": "",
+    "castle": ""
+  },
+  "releasenote": "Still working on it...",
+  "contributors": ["Taber"]
+}

@@ -1,9 +1,13 @@
-import h2d.CdbLevel;
-import collision.*;
-import camera.Camera;
-import entity.Entity;
+package level;
 
-class Level extends CdbLevel {
+import h2d.Object;
+import h2d.CdbLevel;
+import cdb.Types.Index;
+import entity.Entity;
+import collision.CollisionSystem;
+import draw.Sprite;
+
+class Level extends h2d.CdbLevel {
 	private var ents:Array<Entity>;
 	private var camera:Camera;
 
@@ -26,12 +30,14 @@ class Level extends CdbLevel {
 	}
 
 	private function init() {
+		final tileSize = level.props.tileSize;
+
 		// Build collision
 		var colGrid = buildStringProperty("collision");
 		col.buildLevel(colGrid, width, height, tileSize);
 
 		// Camera
-		camera = new Camera(this, scene.width, scene.height, widthPx, heightPx);
+		// camera = new Camera(this, parent.width, scene.height, widthPx, heightPx);
 	}
 
 	public function addEntity(ent:Entity, ?focus:Bool):Void {
@@ -60,7 +66,7 @@ class Level extends CdbLevel {
 	}
 
 	public function setCameraPos(x:Int, y:Int) {
-		this.x = (scene.width >> 1) - x;
-		this.y = (scene.height >> 1) - y;
+		// this.x = (scene.width >> 1) - x;
+		// this.y = (scene.height >> 1) - y;
 	}
 }

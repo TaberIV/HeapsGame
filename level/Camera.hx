@@ -1,4 +1,4 @@
-package camera;
+package level;
 
 import entity.Entity;
 

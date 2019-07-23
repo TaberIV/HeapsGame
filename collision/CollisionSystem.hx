@@ -1,5 +1,6 @@
 package collision;
 
+import level.Level;
 import entity.Actor;
 import entity.Solid;
 

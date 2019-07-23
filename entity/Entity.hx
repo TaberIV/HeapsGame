@@ -1,5 +1,8 @@
 package entity;
 
+import level.Level;
+import draw.Sprite;
+
 /**
 	Entities are game objects that makeup or interact with the level.
 **/
@@ -7,7 +10,7 @@ class Entity {
 	private var xRemainder:Float;
 	private var yRemainder:Float;
 
-	private var spr:draw.Sprite;
+	private var spr:Sprite;
 
 	public var x(default, null):Int;
 	public var y(default, null):Int;
