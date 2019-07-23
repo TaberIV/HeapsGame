@@ -1,5 +1,2 @@
 # haxelib package
 *.zip
-
-# Installer
-install.sh
