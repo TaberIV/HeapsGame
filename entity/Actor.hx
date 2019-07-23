@@ -1,7 +1,7 @@
-package entity.actor;
+package entity;
 
 import collision.ActorCollider;
-import entity.solid.Solid;
+import entity.Solid;
 
 /**
 	Actors are Entities that move and collide with solids.

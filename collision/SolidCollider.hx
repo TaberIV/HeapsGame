@@ -1,6 +1,6 @@
 package collision;
 
-import entity.solid.Solid;
+import entity.Solid;
 
 class SolidCollider extends Collider {
 	private var solid:Solid;

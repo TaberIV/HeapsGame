@@ -1,8 +1,7 @@
 package collision;
 
-import entity.actor.Actor;
-import entity.solid.Solid;
-import entity.solid.LevelSolid;
+import entity.Actor;
+import entity.Solid;
 
 /**
 	CollisionSystem handles collisions in a level.
@@ -40,7 +39,7 @@ class CollisionSystem {
 		for (i in 0...colInfo.length) {
 			switch (colInfo[i]) {
 				case "full":
-					new LevelSolid(level, i % w, Std.int(i / w), 1, 1, tileSize);
+					Solid.levelSolid(level, i % w, Std.int(i / w), 1, 1, tileSize);
 			}
 		}
 	}

@@ -1,6 +1,8 @@
 package draw;
 
 import h2d.Object;
+import h2d.Tile;
+import h2d.Bitmap;
 import entity.Entity;
 
 /**
@@ -13,6 +15,15 @@ class Sprite extends Object {
 		super();
 		this.ent = ent;
 		ent.level.addSprite(this);
+	}
+
+	public static function box(ent:Entity, width:Int, height:Int, color:Int, centered:Bool) {
+		var spr = new Sprite(ent);
+
+		var tile = Tile.fromColor(color, width, height);
+		new Bitmap(centered ? tile.center() : tile, spr);
+
+		return spr;
 	}
 
 	private override function draw(ctx:h2d.RenderContext) {

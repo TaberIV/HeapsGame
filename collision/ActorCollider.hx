@@ -1,7 +1,6 @@
 package collision;
 
-import entity.actor.Actor;
-import entity.solid.Solid;
+import entity.Actor;
 
 class ActorCollider extends Collider {
 	private var actor:Actor;

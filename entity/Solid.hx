@@ -1,4 +1,4 @@
-package entity.solid;
+package entity;
 
 /**
 	`Solids` are `Entities` that `Actors` cannot overlap with. A `Solid` may, or may not, move.
@@ -8,6 +8,13 @@ class Solid extends Entity {
 
 	public var velX(default, null):Float;
 	public var velY(default, null):Float;
+
+	public static function levelSolid(level:Level, x:Int, y:Int, w:Int, h:Int, tileSize:Int) {
+		var solid = new Solid(level, x * tileSize, y * tileSize);
+		solid.col = new SolidCollider(this, w * tileSize, h * tileSize);
+
+		return solid;
+	}
 
 	public function move(x:Float, y:Float) {
 		xRemainder += x;
