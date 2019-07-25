@@ -7,8 +7,11 @@ class PadController {
 	private var deadzone:Float;
 	private var outterDeadzone:Float;
 
-	public var xAxis(get, null):Float;
-	public var yAxis(get, null):Float;
+	public var xAxis(get, never):Float;
+	public var yAxis(get, never):Float;
+
+	public var xAxisPressed(get, never):Int;
+	public var yAxisPressed(get, never):Int;
 
 	private function get_xAxis():Float {
 		if (Math.abs(pad.xAxis) < deadzone) {
@@ -28,6 +31,14 @@ class PadController {
 		} else {
 			return pad.yAxis;
 		}
+	}
+
+	private function get_xAxisPressed():Int {
+		return 0;
+	}
+
+	private function get_yAxisPressed():Int {
+		return 0;
 	}
 
 	public function new(?deadzone:Float = 0.25, ?outterDeadzone = 0.95) {
