@@ -18,12 +18,16 @@ class Camera {
 	private var xMax(get, never):Int;
 	private var yMax(get, never):Int;
 
+	public var track:Entity->Void;
+
 	public var entity:Entity;
 
 	public function new(level:Level, viewWidth:Int, viewHeight:Int, ?zoom:Float = 1) {
 		this.level = level;
 		this.viewWidth = viewWidth;
 		this.viewHeight = viewHeight;
+
+		track = defaultTrack;
 
 		set_zoom(zoom);
 	}
@@ -50,12 +54,15 @@ class Camera {
 		return level.heightPx - Std.int((viewHeight >> 1) / level.scaleY);
 	}
 
-	public function update(dt:Float) {
+	private function defaultTrack(entity:Entity) {
 		if (entity != null) {
 			x = util.Calc.clamp(entity.x, xMin, xMax);
 			y = util.Calc.clamp(entity.y, yMin, yMax);
-
-			level.setCameraPos(x, y);
 		}
+	}
+
+	public function update(dt:Float) {
+		track(entity);
+		level.setCameraPos(x, y);
 	}
 }
