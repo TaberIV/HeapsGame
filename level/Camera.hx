@@ -50,12 +50,15 @@ class Camera {
 		return level.heightPx - Std.int((viewHeight >> 1) / level.scaleY);
 	}
 
-	public function update(dt:Float) {
+	private function track(entity:Entity) {
 		if (entity != null) {
 			x = util.Calc.clamp(entity.x, xMin, xMax);
 			y = util.Calc.clamp(entity.y, yMin, yMax);
 		}
+	}
 
+	public function update(dt:Float) {
+		track(entity);
 		level.setCameraPos(x, y);
 	}
 }
