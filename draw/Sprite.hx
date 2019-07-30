@@ -14,6 +14,18 @@ class Sprite extends Object {
 	public var width(default, null):Int;
 	public var height(default, null):Int;
 
+	public var dir(default, set):Int;
+
+	private function set_dir(dir:Int) {
+		if (dir != 1 && dir != -1) {
+			return this.dir;
+		}
+
+		this.dir = dir;
+		scaleX = dir;
+		return dir;
+	}
+
 	public function new(ent:Entity) {
 		super();
 		this.ent = ent;
