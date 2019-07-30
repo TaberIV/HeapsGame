@@ -10,10 +10,9 @@ import draw.Sprite;
 class Level extends h2d.CdbLevel {
 	private var scene:Scene;
 	private var ents:Array<Entity>;
-	private var camera:Camera;
 
-	private var heightPx:Int;
-	private var widthPx:Int;
+	public var heightPx(default, null):Int;
+	public var widthPx(default, null):Int;
 
 	public var col:CollisionSystem;
 
@@ -38,17 +37,10 @@ class Level extends h2d.CdbLevel {
 		// Build collision
 		var colGrid = buildStringProperty("collision");
 		col.buildLevel(colGrid, width, height, tileSize);
-
-		// Camera
-		camera = new Camera(this, scene.width, scene.height, widthPx, heightPx);
 	}
 
-	public function addEntity(ent:Entity, ?focus:Bool):Void {
+	public function addEntity(ent:Entity):Void {
 		ents.push(ent);
-
-		if (focus) {
-			camera.entity = ent;
-		}
 	}
 
 	public function removeEntity(ent:Entity):Bool {
@@ -64,8 +56,6 @@ class Level extends h2d.CdbLevel {
 		for (ent in ents) {
 			ent.update(dt);
 		}
-
-		camera.update(dt);
 	}
 
 	public function setCameraPos(x:Float, y:Float) {

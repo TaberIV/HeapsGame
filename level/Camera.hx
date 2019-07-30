@@ -8,25 +8,45 @@ class Camera {
 	private var x:Float;
 	private var y:Float;
 
-	private var width:Int;
-	private var height:Int;
+	private var viewWidth:Int;
+	private var viewHeight:Int;
 
-	private var xMin:Int;
-	private var yMin:Int;
-	private var xMax:Int;
-	private var yMax:Int;
+	private var zoom:Float;
+
+	private var xMin(get, never):Int;
+	private var yMin(get, never):Int;
+	private var xMax(get, never):Int;
+	private var yMax(get, never):Int;
 
 	public var entity:Entity;
 
-	public function new(level:Level, viewWidth:Int, viewHeight:Int, worldWidth:Int, worldHeight:Int) {
+	public function new(level:Level, viewWidth:Int, viewHeight:Int, ?zoom:Float = 1) {
 		this.level = level;
-		this.width = viewWidth;
-		this.height = viewHeight;
+		this.viewWidth = viewWidth;
+		this.viewHeight = viewHeight;
 
-		xMin = Std.int((width >> 1) / level.scaleX);
-		yMin = Std.int((height >> 1) / level.scaleY);
-		xMax = Std.int(worldWidth - (width >> 1) / level.scaleX);
-		yMax = Std.int(worldHeight - (height >> 1) / level.scaleY);
+		setZoom(zoom);
+	}
+
+	public function setZoom(zoom:Float):Void {
+		this.zoom = zoom;
+		level.setScale(zoom);
+	}
+
+	private inline function get_xMin():Int {
+		return Std.int((viewWidth >> 1) / zoom);
+	}
+
+	private inline function get_yMin():Int {
+		return Std.int((viewHeight >> 1) / zoom);
+	}
+
+	private inline function get_xMax():Int {
+		return level.widthPx - Std.int((viewWidth >> 1) / level.scaleX);
+	}
+
+	private inline function get_yMax():Int {
+		return level.heightPx - Std.int((viewHeight >> 1) / level.scaleY);
 	}
 
 	public function update(dt:Float) {
