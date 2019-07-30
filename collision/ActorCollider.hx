@@ -13,6 +13,14 @@ class ActorCollider extends Collider {
 		colSys.addActor(actor);
 	}
 
+	public static function fromOrigin(ent:Actor, width:Int, height:Int, xOrigin:Int, yOrigin:Int) {
+		var c = new ActorCollider(ent, width, height, false);
+		c.xOrigin = xOrigin;
+		c.yOrigin = yOrigin;
+
+		return c;
+	}
+
 	public function getSolidAt(x:Int, y:Int):Solid {
 		var xMin = x - xOrigin;
 		var yMin = y - yOrigin;
