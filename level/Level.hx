@@ -49,7 +49,6 @@ class Level extends h2d.CdbLevel {
 
 	public function addSprite(s:Sprite) {
 		addChildAt(s, 1);
-		under(s);
 	}
 
 	public function update(dt:Float):Void {
