@@ -17,9 +17,10 @@ class Level extends h2d.CdbLevel {
 
 	public var col:CollisionSystem;
 
-	public function new(allLevels:Index<Dynamic>, index:Int, parent:Scene) {
+	public function new(allLevels:Index<Dynamic>, index:Int, parent:Scene, ?lscale:Float = 1) {
 		super(allLevels, index, parent);
 		this.scene = parent;
+		scale(lscale);
 
 		ents = new Array<Entity>();
 		col = new CollisionSystem(this);
@@ -67,8 +68,8 @@ class Level extends h2d.CdbLevel {
 		camera.update(dt);
 	}
 
-	public function setCameraPos(x:Int, y:Int) {
-		this.x = (scene.width >> 1) - x;
-		this.y = (scene.height >> 1) - y;
+	public function setCameraPos(x:Float, y:Float) {
+		this.x = (scene.width >> 1) - x * scaleX;
+		this.y = (scene.height >> 1) - y * scaleY;
 	}
 }

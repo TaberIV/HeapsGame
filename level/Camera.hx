@@ -23,10 +23,10 @@ class Camera {
 		this.width = viewWidth;
 		this.height = viewHeight;
 
-		xMin = width >> 1;
-		yMin = height >> 1;
-		xMax = worldWidth - (width >> 1);
-		yMax = worldHeight - (height >> 1);
+		xMin = Std.int((width >> 1) / level.scaleX);
+		yMin = Std.int((height >> 1) / level.scaleY);
+		xMax = Std.int(worldWidth - (width >> 1) / level.scaleX);
+		yMax = Std.int(worldHeight - (height >> 1) / level.scaleY);
 	}
 
 	public function update(dt:Float) {
@@ -34,7 +34,7 @@ class Camera {
 			x = util.Calc.clamp(entity.x, xMin, xMax);
 			y = util.Calc.clamp(entity.y, yMin, yMax);
 
-			level.setCameraPos(Math.round(x), Math.round(y));
+			level.setCameraPos(x, y);
 		}
 	}
 }
