@@ -11,7 +11,7 @@ class Camera {
 	private var viewWidth:Int;
 	private var viewHeight:Int;
 
-	private var zoom:Float;
+	public var zoom(default, set):Float;
 
 	private var xMin(get, never):Int;
 	private var yMin(get, never):Int;
@@ -25,12 +25,13 @@ class Camera {
 		this.viewWidth = viewWidth;
 		this.viewHeight = viewHeight;
 
-		setZoom(zoom);
+		set_zoom(zoom);
 	}
 
-	public function setZoom(zoom:Float):Void {
+	private function set_zoom(zoom:Float) {
 		this.zoom = zoom;
 		level.setScale(zoom);
+		return zoom;
 	}
 
 	private inline function get_xMin():Int {
