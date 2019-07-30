@@ -21,6 +21,13 @@ class ActorCollider extends Collider {
 		return c;
 	}
 
+	public static function fromSprite(ent:Actor, top:Int, bottom:Int, left:Int, right:Int) {
+		var width = ent.spr.width;
+		var height = ent.spr.height;
+
+		return fromOrigin(ent, width - (left + right), height - (top + bottom), (width >> 1) - left, (height >> 1) - top);
+	}
+
 	public function getSolidAt(x:Int, y:Int):Solid {
 		var xMin = x - xOrigin;
 		var yMin = y - yOrigin;

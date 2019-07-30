@@ -10,12 +10,11 @@ class Entity {
 	private var xRemainder:Float;
 	private var yRemainder:Float;
 
-	private var spr:Sprite;
-
 	public var x(default, null):Int;
 	public var y(default, null):Int;
 
 	public var level:Level;
+	public var spr:Sprite;
 
 	public function new(level:Level, x:Float, y:Float) {
 		set_x_Float(x);

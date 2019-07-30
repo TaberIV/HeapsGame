@@ -11,6 +11,9 @@ import entity.Entity;
 class Sprite extends Object {
 	private var ent:Entity;
 
+	public var width(default, null):Int;
+	public var height(default, null):Int;
+
 	public function new(ent:Entity) {
 		super();
 		this.ent = ent;
@@ -19,6 +22,8 @@ class Sprite extends Object {
 
 	public static function box(ent:Entity, width:Int, height:Int, color:Int, centered:Bool) {
 		var spr = new Sprite(ent);
+		spr.width = width;
+		spr.height = height;
 
 		var tile = Tile.fromColor(color, width, height);
 		new Bitmap(centered ? tile.center() : tile, spr);
