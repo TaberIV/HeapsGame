@@ -16,10 +16,9 @@ class Level extends h2d.CdbLevel {
 
 	public var col:CollisionSystem;
 
-	public function new(allLevels:Index<Dynamic>, index:Int, parent:Scene, ?lscale:Float = 1) {
+	public function new(allLevels:Index<Dynamic>, index:Int, parent:Scene) {
 		super(allLevels, index, parent);
 		this.scene = parent;
-		scale(lscale);
 
 		ents = new Array<Entity>();
 		col = new CollisionSystem(this);
