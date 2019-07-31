@@ -16,7 +16,7 @@ class AnimatedSprite<T> extends Sprite {
 		this.animMap = animMap;
 
 		this.width = width;
-		this.height = height;
+		this.height = height == null ? width : height;
 	}
 
 	public function setAnim(state:T) {

@@ -3,10 +3,11 @@ package draw;
 import h2d.Object;
 import h2d.Tile;
 import h2d.Bitmap;
+import hxd.res.Image;
 import entity.Entity;
 
 /**
-	`Sprite` is a wrapper class for `h2d.Object`.
+	`Sprite`s contain all visual components of an `Entity`.
 **/
 class Sprite extends Object {
 	private var ent:Entity;
@@ -30,10 +31,19 @@ class Sprite extends Object {
 		return t.center();
 	}
 
-	public function new(ent:Entity) {
+	public function new(ent:Entity, ?img:Image, ?centered:Bool = false) {
 		super();
 		this.ent = ent;
 		ent.level.addSprite(this);
+
+		if (img != null) {
+			var t = centered ? img.toTile().center() : img.toTile();
+
+			this.width = t.iwidth;
+			this.height = t.iheight;
+
+			var b = new Bitmap(t, this);
+		}
 	}
 
 	public static function box(ent:Entity, width:Int, height:Int, color:Int, centered:Bool) {
