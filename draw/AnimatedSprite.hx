@@ -4,26 +4,22 @@ import h2d.Anim;
 import h2d.Tile;
 import entity.Entity;
 
-class AnimatedSprite extends Sprite {
+class AnimatedSprite<T> extends Sprite {
 	private var anim:Anim;
-	private var animMap:Map<String, Array<Tile>>;
-	private var state:String;
+	private var animMap:Map<T, Array<Tile>>;
+	private var state:T;
 
-	public function new(ent:Entity, size:Int, map:Map<String, hxd.res.Image>) {
+	public function new(ent:Entity, animMap:Map<T, Array<Tile>>, ?width:Int, ?height:Int) {
 		super(ent);
 
-		width = size;
-		height = size;
-
 		anim = new Anim(null, 15, this);
-		animMap = new Map<String, Array<Tile>>();
+		this.animMap = animMap;
 
-		for (s in map.keys()) {
-			animMap.set(s, getFrames(map.get(s), size));
-		}
+		this.width = width;
+		this.height = height;
 	}
 
-	public function setAnim(state:String) {
+	public function setAnim(state:T) {
 		if (state == this.state) {
 			return;
 		}
@@ -32,11 +28,7 @@ class AnimatedSprite extends Sprite {
 		this.state = state;
 	}
 
-	private static function getFrames(img:hxd.res.Image, size:Int) {
-		return img.toTile().gridFlatten(size).map(centerTile);
-	}
-
-	private static function centerTile(t) {
-		return t.center();
+	public static function getFrames(img:hxd.res.Image, size:Int):Array<Tile> {
+		return img.toTile().gridFlatten(size).map(Sprite.centerTile);
 	}
 }
