@@ -10,15 +10,17 @@ import draw.Sprite;
 class Level extends h2d.CdbLevel {
 	private var scene:Scene;
 	private var ents:Array<Entity>;
+	private var levelLayer:Int;
 
 	public var heightPx(default, null):Int;
 	public var widthPx(default, null):Int;
 
 	public var col:CollisionSystem;
 
-	public function new(allLevels:Index<Dynamic>, index:Int, parent:Scene) {
+	public function new(allLevels:Index<Dynamic>, index:Int, parent:Scene, ?levelLayer:Int = 1) {
 		super(allLevels, index, parent);
 		this.scene = parent;
+		this.levelLayer = levelLayer;
 
 		ents = new Array<Entity>();
 		col = new CollisionSystem(this);
@@ -47,7 +49,7 @@ class Level extends h2d.CdbLevel {
 	}
 
 	public function addSprite(s:Sprite) {
-		addChildAt(s, 1);
+		addChildAt(s, levelLayer);
 	}
 
 	public function update(dt:Float):Void {
