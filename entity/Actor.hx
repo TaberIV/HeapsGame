@@ -1,6 +1,5 @@
 package entity;
 
-import collision.ActorCollider;
 import entity.Solid;
 
 /**
@@ -8,8 +7,6 @@ import entity.Solid;
 **/
 class Actor extends Entity {
 	private var lastRide:Solid;
-
-	public var col:ActorCollider;
 
 	public function moveX(amount:Float, ?action:Solid->Void) {
 		xRemainder += amount;

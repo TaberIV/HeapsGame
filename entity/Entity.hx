@@ -1,5 +1,6 @@
 package entity;
 
+import collision.Collider;
 import level.Level;
 import draw.Sprite;
 
@@ -13,8 +14,9 @@ class Entity {
 	public var x(default, null):Int;
 	public var y(default, null):Int;
 
-	public var level:Level;
+	public var level(default, null):Level;
 	public var spr:Sprite;
+	public var col:Collider;
 
 	public function new(level:Level, x:Float, y:Float) {
 		set_x_Float(x);
