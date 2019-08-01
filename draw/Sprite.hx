@@ -27,10 +27,6 @@ class Sprite extends Object {
 		return dir;
 	}
 
-	private static function centerTile(t) {
-		return t.center();
-	}
-
 	public function new(ent:Entity, ?img:Image, ?centered:Bool = false) {
 		super();
 		this.ent = ent;

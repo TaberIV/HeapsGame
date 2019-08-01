@@ -29,7 +29,7 @@ class AnimatedSprite<T> extends Sprite {
 		this.state = state;
 	}
 
-	public static function getFrames(img:hxd.res.Image, size:Int):Array<Tile> {
-		return img.toTile().gridFlatten(size).map(Sprite.centerTile);
+	public static function getFrames(img:hxd.res.Image, size:Int, ?xOrigin:Int, ?yOrigin:Int) {
+		return img.toTile().gridFlatten(size, -xOrigin, -yOrigin);
 	}
 }
