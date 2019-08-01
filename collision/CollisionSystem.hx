@@ -36,15 +36,6 @@ class CollisionSystem {
 		return solids.remove(s);
 	}
 
-	public function buildLevel(colInfo:Array<String>, w:Int, h:Int, tileSize:Int) {
-		for (i in 0...colInfo.length) {
-			switch (colInfo[i]) {
-				case "full":
-					Solid.levelSolid(level, i % w, Std.int(i / w), 1, 1, tileSize);
-			}
-		}
-	}
-
 	public function pointsCollide(xMin:Int, yMin:Int, xMax:Int, yMax:Int) {
 		for (solid in solids) {
 			if (solid.col.active && Collider.pointsIntersects(xMin, yMin, xMax, yMax, solid.col)) {

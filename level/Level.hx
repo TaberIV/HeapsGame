@@ -7,6 +7,8 @@ import entity.Entity;
 import collision.CollisionSystem;
 import draw.Sprite;
 
+typedef LevelObject = (level:Level, x:Int, y:Int, w:Int, h:Int, tileSize:Int) -> Entity;
+
 class Level extends h2d.CdbLevel {
 	private var scene:Scene;
 	private var ents:Array<Entity>;
@@ -28,16 +30,18 @@ class Level extends h2d.CdbLevel {
 		final tileSize = level.props.tileSize;
 		heightPx = height * tileSize;
 		widthPx = width * tileSize;
-
-		init();
 	}
 
-	private function init() {
-		final tileSize = level.props.tileSize;
+	public function buildProperty(property:String, colMap:Map<String, LevelObject>) {
+		var prop = buildStringProperty(property);
 
-		// Build collision
-		var colGrid = buildStringProperty("collision");
-		col.buildLevel(colGrid, width, height, tileSize);
+		for (i in 0...prop.length) {
+			var obj = colMap.get(prop[i]);
+
+			if (obj != null) {
+				obj(this, i % width, Std.int(i / width), 1, 1, level.props.tileSize);
+			}
+		}
 	}
 
 	public function addEntity(ent:Entity):Void {

@@ -42,7 +42,7 @@ class Sprite extends Object {
 			this.width = t.iwidth;
 			this.height = t.iheight;
 
-			var b = new Bitmap(t, this);
+			new Bitmap(t, this);
 		}
 	}
 
