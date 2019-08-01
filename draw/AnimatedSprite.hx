@@ -30,6 +30,9 @@ class AnimatedSprite<T> extends Sprite {
 	}
 
 	public static function getFrames(img:hxd.res.Image, size:Int, ?xOrigin:Int, ?yOrigin:Int) {
+		xOrigin = xOrigin == null ? size >> 1 : xOrigin;
+		yOrigin = yOrigin == null ? size >> 1 : yOrigin;
+
 		return img.toTile().gridFlatten(size, -xOrigin, -yOrigin);
 	}
 }
