@@ -9,14 +9,15 @@ class AnimatedSprite<T> extends Sprite {
 	private var animMap:Map<T, Array<Tile>>;
 	private var state:T;
 
-	public function new(ent:Entity, animMap:Map<T, Array<Tile>>, ?width:Int, ?height:Int) {
+	public function new(ent:Entity, animMap:Map<T, Array<Tile>>) {
 		super(ent);
 
 		anim = new Anim(null, 15, this);
 		this.animMap = animMap;
 
-		this.width = width;
-		this.height = height == null ? width : height;
+		var tile1 = animMap.keyValueIterator().next().value[0];
+		this.width = tile1.iwidth;
+		this.height = tile1.iheight;
 	}
 
 	public function setAnim(state:T) {
