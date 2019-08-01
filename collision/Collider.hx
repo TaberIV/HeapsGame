@@ -51,11 +51,17 @@ class Collider {
 		return c;
 	}
 
-	public static function fromSprite(ent:Actor, top:Int, bottom:Int, left:Int, right:Int) {
-		var width = ent.spr.width;
-		var height = ent.spr.height;
+	public static function fromSprite(ent:Actor, top:Int, bottom:Int, left:Int, right:Int, ?xOrigin:Int, ?yOrigin:Int) {
+		var sprWidth = ent.spr.width;
+		var sprHeight = ent.spr.height;
 
-		return fromOrigin(ent, width - (left + right), height - (top + bottom), (width >> 1) - left, (height >> 1) - top);
+		var width = sprWidth - (left + right);
+		var height = sprHeight - (top + bottom);
+
+		xOrigin = xOrigin == null ? (sprWidth >> 1) : xOrigin;
+		yOrigin = yOrigin == null ? (sprHeight >> 1) : yOrigin;
+
+		return fromOrigin(ent, width, height, xOrigin - left, yOrigin - top);
 	}
 
 	public static inline function pointsIntersects(xMin:Int, yMin:Int, xMax:Int, yMax:Int, c:Collider) {
@@ -124,7 +130,7 @@ class Collider {
 		} else if (Std.downcast(ent, Solid) != null) {
 			colSys.removeSolid(Std.downcast(ent, Solid));
 		}
-		
+
 		ent = null;
 	}
 }

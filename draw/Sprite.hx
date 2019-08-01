@@ -53,9 +53,9 @@ class Sprite extends Object {
 		t.dx = -xOrigin;
 		t.dy = -yOrigin;
 
-		new Bitmap(t, spr);
 		spr.width = t.iwidth;
 		spr.height = t.iheight;
+		new Bitmap(t, spr);
 
 		return spr;
 	}
