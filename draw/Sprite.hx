@@ -44,20 +44,6 @@ class Sprite extends Object {
 		}
 	}
 
-	public static function withOrigin(ent:Entity, img:Image, xOrigin:Int, yOrigin:Int) {
-		var spr = new Sprite(ent);
-
-		var t = img.toTile();
-		t.dx = -xOrigin;
-		t.dy = -yOrigin;
-
-		spr.width = t.iwidth;
-		spr.height = t.iheight;
-		new Bitmap(t, spr);
-
-		return spr;
-	}
-
 	public static function box(ent:Entity, width:Int, height:Int, color:Int, ?centered:Bool) {
 		var spr = new Sprite(ent);
 		spr.width = width;
