@@ -14,18 +14,27 @@ class Entity {
 	public var x(default, null):Int;
 	public var y(default, null):Int;
 
+	public var id(default, null):String;
+
 	public var level(default, null):Level;
 	public var spr:Sprite;
 	public var col:Collider;
 
 	public var onActivate:Void->Void;
 
-	public function new(level:Level, x:Float, y:Float) {
+	public function new(level:Level, x:Float, y:Float, ?id:String) {
+		this.level = level;
+
 		set_x_Float(x);
 		set_y_Float(y);
 
-		this.level = level;
+		this.id = id;
+
 		level.addEntity(this);
+
+		if (id != null) {
+			trace('${id} added to level.');
+		}
 
 		onActivate = function() return;
 
