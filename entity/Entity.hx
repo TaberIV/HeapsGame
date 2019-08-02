@@ -32,10 +32,6 @@ class Entity {
 
 		level.addEntity(this);
 
-		if (id != null) {
-			trace('${id} added to level.');
-		}
-
 		onActivate = function() return;
 
 		init();

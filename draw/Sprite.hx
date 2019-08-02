@@ -9,6 +9,8 @@ import entity.Entity;
 /**
 	`Sprite`s contain all visual components of an `Entity`.
 **/
+typedef Rect = {x:Int, y:Int, w:Int, h:Int};
+
 class Sprite extends Object {
 	private var ent:Entity;
 
@@ -27,13 +29,18 @@ class Sprite extends Object {
 		return dir;
 	}
 
-	public function new(ent:Entity, ?img:Image, ?xOrigin:Int, ?yOrigin:Int) {
+	public function new(ent:Entity, ?img:Image, ?xOrigin:Int, ?yOrigin:Int, ?sub:Rect) {
 		super();
 		this.ent = ent;
 		ent.level.addSprite(this);
 
 		if (img != null) {
 			var t = img.toTile();
+
+			if (sub != null) {
+				t = t.sub(sub.x, sub.y, sub.w, sub.h);
+			}
+
 			this.width = t.iwidth;
 			this.height = t.iheight;
 

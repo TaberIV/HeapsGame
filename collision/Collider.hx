@@ -43,7 +43,7 @@ class Collider {
 		}
 	}
 
-	public static function fromSprite(ent:Actor, top:Int, bottom:Int, left:Int, right:Int, ?xOrigin:Int, ?yOrigin:Int) {
+	public static function fromSprite(ent:Entity, top:Int, bottom:Int, left:Int, right:Int, ?xOrigin:Int, ?yOrigin:Int) {
 		var sprWidth = ent.spr.width;
 		var sprHeight = ent.spr.height;
 
