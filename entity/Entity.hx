@@ -18,12 +18,16 @@ class Entity {
 	public var spr:Sprite;
 	public var col:Collider;
 
+	public var onActivate:Void->Void;
+
 	public function new(level:Level, x:Float, y:Float) {
 		set_x_Float(x);
 		set_y_Float(y);
 
 		this.level = level;
 		level.addEntity(this);
+
+		onActivate = function() return;
 
 		init();
 	}
