@@ -42,7 +42,6 @@ class Trigger extends Entity {
 		}
 
 		if (actors.length != actorsBefore + newActors) {
-			trace("someone left");
 			var actorsLeft = new Array<Actor>();
 			for (i in 0...actorsBefore) {
 				if (!col.intersects(actorsWithin[i].col)) {
@@ -57,8 +56,6 @@ class Trigger extends Entity {
 
 				actorsWithin.remove(a);
 			}
-		} else {
-			trace('${actorsWithin.length} = ${actorsBefore} + ${newActors}');
 		}
 	}
 }
