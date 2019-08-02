@@ -31,22 +31,17 @@ class Trigger extends Entity {
 		var newActors = 0;
 
 		for (a in actors) {
-			trace("there exists an actor...");
-			if (actorsWithin.indexOf(a) != -1) {
+			if (actorsWithin.indexOf(a) == -1) {
 				if (onActorEnter != null) {
 					onActorEnter(a);
 				}
 
 				actorsWithin.push(a);
 				newActors++;
-
-				trace("Enter");
 			}
 		}
 
-		// ! I was drunk here so if triggers cause issues check this
 		if (actorsBefore != actorsWithin.length + newActors) {
-			trace("At least one left...");
 			var actorsLeft = new Array<Actor>();
 			for (i in 0...actorsBefore) {
 				if (!col.intersects(actorsWithin[i].col)) {
@@ -60,7 +55,6 @@ class Trigger extends Entity {
 				}
 
 				actorsWithin.remove(a);
-				trace("Exit");
 			}
 		}
 	}
