@@ -27,16 +27,18 @@ class Sprite extends Object {
 		return dir;
 	}
 
-	public function new(ent:Entity, ?img:Image, ?centered:Bool = false) {
+	public function new(ent:Entity, ?img:Image, ?xOrigin:Int, ?yOrigin:Int) {
 		super();
 		this.ent = ent;
 		ent.level.addSprite(this);
 
 		if (img != null) {
-			var t = centered ? img.toTile().center() : img.toTile();
-
+			var t = img.toTile();
 			this.width = t.iwidth;
 			this.height = t.iheight;
+
+			t.dx = -(xOrigin == null ? width >> 1 : xOrigin);
+			t.dy = -(yOrigin == null ? width >> 1 : yOrigin);
 
 			new Bitmap(t, this);
 		}

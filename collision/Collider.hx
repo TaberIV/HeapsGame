@@ -26,12 +26,12 @@ class Collider {
 
 	public var active:Bool = true;
 
-	public function new(ent:Entity, width:Int, height:Int, ?centered:Bool = false) {
+	public function new(ent:Entity, width:Int, height:Int, ?xOrigin:Int, ?yOrigin:Int) {
 		this.ent = ent;
 		colSys = ent.level.col;
 
-		xOrigin = centered ? width >> 1 : 0;
-		yOrigin = centered ? height >> 1 : 0;
+		this.xOrigin = xOrigin == null ? width >> 1 : xOrigin;
+		this.yOrigin = yOrigin == null ? height >> 1 : yOrigin;
 
 		this.width = width;
 		this.height = height;
@@ -41,14 +41,6 @@ class Collider {
 		} else if (Std.downcast(ent, Solid) != null) {
 			colSys.addSolid(Std.downcast(ent, Solid));
 		}
-	}
-
-	public static function fromOrigin(ent:Entity, width:Int, height:Int, xOrigin:Int, yOrigin:Int) {
-		var c = new Collider(ent, width, height, false);
-		c.xOrigin = xOrigin;
-		c.yOrigin = yOrigin;
-
-		return c;
 	}
 
 	public static function fromSprite(ent:Actor, top:Int, bottom:Int, left:Int, right:Int, ?xOrigin:Int, ?yOrigin:Int) {
@@ -61,7 +53,7 @@ class Collider {
 		xOrigin = xOrigin == null ? (sprWidth >> 1) : xOrigin;
 		yOrigin = yOrigin == null ? (sprHeight >> 1) : yOrigin;
 
-		return fromOrigin(ent, width, height, xOrigin - left, yOrigin - top);
+		return new Collider(ent, width, height, xOrigin - left, yOrigin - top);
 	}
 
 	public static inline function pointsIntersects(xMin:Int, yMin:Int, xMax:Int, yMax:Int, c:Collider) {
