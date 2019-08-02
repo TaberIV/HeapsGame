@@ -73,9 +73,4 @@ class Actor extends Entity {
 	public function squish(?solid:Solid):Void {
 		destroy();
 	}
-
-	override function destroy() {
-		super.destroy();
-		col.destroy();
-	}
 }

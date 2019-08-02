@@ -44,7 +44,7 @@ class Trigger extends Entity {
 		if (actors.length != actorsBefore + newActors) {
 			var actorsLeft = new Array<Actor>();
 			for (i in 0...actorsBefore) {
-				if (!col.intersects(actorsWithin[i].col)) {
+				if (actorsWithin[i].isDestroyed || !col.intersects(actorsWithin[i].col)) {
 					actorsLeft.push(actorsWithin[i]);
 				}
 			}

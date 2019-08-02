@@ -8,6 +8,8 @@ import draw.Sprite;
 	Entities are game objects that makeup or interact with the level.
 **/
 class Entity {
+	private var isDestroyed(default, null):Bool = false;
+
 	private var xRemainder:Float;
 	private var yRemainder:Float;
 
@@ -52,9 +54,15 @@ class Entity {
 	public function update(dt:Float):Void {}
 
 	public function destroy() {
+		isDestroyed = true;
+
 		if (spr != null) {
 			spr.destroy();
 			spr = null;
+		}
+		if (col != null) {
+			col.destroy();
+			col = null;
 		}
 
 		level.removeEntity(this);

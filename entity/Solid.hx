@@ -61,9 +61,4 @@ class Solid extends Entity {
 
 		col.active = true;
 	}
-
-	override function destroy() {
-		super.destroy();
-		col.destroy();
-	}
 }
