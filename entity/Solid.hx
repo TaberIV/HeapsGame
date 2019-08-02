@@ -28,34 +28,34 @@ class Solid extends Entity {
 			col.active = false;
 
 			if (moveX != 0) {
-				xRemainder -= moveX;
-				this.x += moveX;
-
 				// Push or carry actors
 				// Todo: Implement function that returns these in two lists
 				for (a in level.col.actors) {
-					if (a.col.intersects(col)) {
+					if (col.intersectsAt(a.col, this.x + moveX, this.y)) {
 						var aMove = moveX > 0 ? col.xMax - a.col.xMin : col.xMin - a.col.xMax;
 						a.moveX(aMove, a.squish);
 					} else if (a.isRiding(this)) {
 						a.moveX(moveX);
 					}
 				}
+
+				xRemainder -= moveX;
+				this.x += moveX;
 			}
 
 			if (moveY != 0) {
-				yRemainder -= moveY;
-				this.y += moveY;
-
 				// Push or carry actors
 				for (a in level.col.actors) {
-					if (a.col.intersects(col)) {
+					if (col.intersectsAt(a.col, this.x, this.y + moveY)) {
 						var aMove = moveY > 0 ? col.yMax - a.col.yMin : col.yMin - a.col.yMax;
 						a.moveY(aMove, a.squish);
 					} else if (a.isRiding(this)) {
 						a.moveY(moveY);
 					}
 				}
+
+				yRemainder -= moveY;
+				this.y += moveY;
 			}
 		}
 
