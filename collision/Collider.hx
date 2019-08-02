@@ -12,14 +12,14 @@ class Collider {
 	private var ent:entity.Entity;
 	private var colSys:CollisionSystem;
 
-	public var xMin(get, null):Int;
-	public var yMin(get, null):Int;
+	public var xMin(get, never):Int;
+	public var yMin(get, never):Int;
 
-	public var xMax(get, null):Int;
-	public var yMax(get, null):Int;
+	public var xMax(get, never):Int;
+	public var yMax(get, never):Int;
 
-	public var x(get, null):Int;
-	public var y(get, null):Int;
+	public var x(get, never):Int;
+	public var y(get, never):Int;
 
 	public var width(default, null):Int;
 	public var height(default, null):Int;
