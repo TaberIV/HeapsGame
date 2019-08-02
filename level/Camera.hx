@@ -31,6 +31,7 @@ class Camera {
 	private function set_zoom(zoom:Float) {
 		this.zoom = zoom;
 		level.setScale(zoom);
+		update(0);
 		return zoom;
 	}
 
