@@ -13,6 +13,17 @@ class Trigger extends Entity {
 	public var onActorEnter:Actor->Void;
 	public var onActorExit:Actor->Void;
 
+	public var xMax(get, never):Int;
+	public var yMax(get, never):Int;
+
+	function get_xMax() {
+		return x + col.width;
+	}
+
+	function get_yMax() {
+		return y + col.height;
+	}
+
 	public function new(level:Level, x:Float, y:Float, width:Int, height:Int) {
 		super(level, x, y);
 
