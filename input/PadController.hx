@@ -53,4 +53,8 @@ class PadController {
 		// Connect pad
 		pad = gp;
 	}
+
+	public function destroy() {
+		pad = null;
+	}
 }
