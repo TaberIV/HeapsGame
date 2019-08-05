@@ -1,4 +1,4 @@
--lib heaps
+-lib heaps:git:git@github.com:HeapsIO/heaps.git#ac34234
 -lib castle
 
 --macro include('level')
