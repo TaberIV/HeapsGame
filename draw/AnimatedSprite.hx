@@ -2,25 +2,44 @@ package draw;
 
 import h2d.Anim;
 import h2d.Tile;
+import hxd.res.Image;
 import entity.Entity;
 
-class AnimatedSprite<T> extends Sprite {
+class AnimatedSprite extends Sprite {
 	private var anim:Anim;
-	private var animMap:Map<T, Array<Tile>>;
-	private var state:T;
+	private var animMap:Map<String, Array<Tile>>;
+	private var state:String;
 
-	public function new(ent:Entity, animMap:Map<T, Array<Tile>>) {
+	public function new(ent:Entity) {
 		super(ent);
 
 		anim = new Anim(null, 15, this);
-		this.animMap = animMap;
+		this.animMap = new Map();
 
-		var tile1 = animMap.keyValueIterator().next().value[0];
-		this.width = tile1.iwidth;
-		this.height = tile1.iheight;
+		this.width = -1;
+		this.height = -1;
 	}
 
-	public function setAnim(state:T) {
+	public function loadFrames(state:String, frames:Array<Tile>) {
+		animMap.set(state, frames);
+
+		if (this.width == -1 || this.height == -1) {
+			this.width = frames[0].iwidth;
+			this.height = frames[0].iheight;
+		}
+	}
+
+	public function loadAnim(state:String, img:Image, size:Int, ?xOrigin:Int, ?yOrigin:Int) {
+		loadFrames(state, getFrames(img, size, xOrigin, yOrigin));
+	}
+
+	public function loadAnims(map:Map<String, Image>, size:Int, ?xOrigin:Int, ?yOrigin:Int) {
+		for (kv in map.keyValueIterator()) {
+			loadAnim(kv.key, kv.value, size, xOrigin, yOrigin);
+		}
+	}
+
+	public function setAnim(state:String) {
 		if (state == this.state) {
 			return;
 		}
