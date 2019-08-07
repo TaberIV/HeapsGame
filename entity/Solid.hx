@@ -10,9 +10,9 @@ class Solid extends Entity {
 	public var velX(default, null):Float;
 	public var velY(default, null):Float;
 
-	public static function levelSolid(level:Level, x:Int, y:Int, w:Int, h:Int, tileSize:Int) {
-		var solid = new Solid(level, x * tileSize, y * tileSize);
-		solid.col = new Collider(solid, w * tileSize, h * tileSize, 0, 0);
+	public static function levelSolid(level:Level, x:Int, y:Int, w:Int, h:Int) {
+		var solid = new Solid(level, x, y);
+		solid.col = new Collider(solid, w, h, 0, 0);
 
 		return solid;
 	}
