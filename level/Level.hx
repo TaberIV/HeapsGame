@@ -3,6 +3,7 @@ package level;
 import h2d.Scene;
 import h2d.CdbLevel;
 import cdb.Types.Index;
+import input.PadManager;
 import entity.Entity;
 import collision.CollisionSystem;
 import draw.Sprite;
@@ -18,6 +19,7 @@ class Level extends h2d.CdbLevel {
 	public var widthPx(default, null):Int;
 
 	public var col:CollisionSystem;
+	public var padManager:PadManager;
 
 	public function new(allLevels:Index<Dynamic>, index:Int, parent:Scene, ?levelLayer:Int = 1) {
 		super(allLevels, index, parent);
@@ -31,16 +33,18 @@ class Level extends h2d.CdbLevel {
 		widthPx = width * level.props.tileSize;
 	}
 
-	public function buildProperty(property:String, colMap:Map<String, LevelObject>) {
+	public function buildProperty(property:String, propMap:Map<String, LevelObject>, ?cMap:Map<String, Bool>) {
 		final tileSize = level.props.tileSize;
 
 		var prop = buildStringProperty(property);
 
 		for (i in 0...prop.length) {
-			var obj = colMap.get(prop[i]);
+			var kind = propMap.get(prop[i]);
 
-			if (obj != null) {
-				obj(this, (i % width) * tileSize, Std.int(i / width) * tileSize, tileSize, tileSize);
+			if (kind != null) {
+				if (cMap == null || cMap.get(prop[i]) != true) {
+					kind(this, (i % width) * tileSize, Std.int(i / width) * tileSize, tileSize, tileSize);
+				}
 			}
 		}
 	}

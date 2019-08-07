@@ -3,6 +3,7 @@ package input;
 import hxd.Pad;
 
 class PadController {
+	private var manager:PadManager;
 	private var pad:Pad;
 	private var deadzone:Float;
 	private var outterDeadzone:Float;
@@ -41,20 +42,18 @@ class PadController {
 		return 0;
 	}
 
-	public function new(?deadzone:Float = 0.25, ?outterDeadzone = 0.95) {
+	public function new(manager:PadManager, ?index:Int, ?deadzone:Float = 0.25, ?outterDeadzone = 0.95) {
 		pad = Pad.createDummy();
-		Pad.wait(onPadConnect);
+
+		this.manager = manager;
+		manager.getPad(function(p:Pad) this.pad = p, index);
 
 		this.deadzone = deadzone;
 		this.outterDeadzone = outterDeadzone;
 	}
 
-	private function onPadConnect(gp:Pad) {
-		// Connect pad
-		pad = gp;
-	}
-
 	public function destroy() {
+		manager.releasePad(pad);
 		pad = null;
 	}
 }
