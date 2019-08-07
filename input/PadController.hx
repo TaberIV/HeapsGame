@@ -43,13 +43,26 @@ class PadController {
 	}
 
 	public function new(manager:PadManager, ?index:Int, ?deadzone:Float = 0.25, ?outterDeadzone = 0.95) {
-		pad = Pad.createDummy();
-
 		this.manager = manager;
-		manager.getPad(function(p:Pad) this.pad = p, index);
 
 		this.deadzone = deadzone;
 		this.outterDeadzone = outterDeadzone;
+
+		newPad(index);
+	}
+
+	private function newPad(?index:Int) {
+		pad = Pad.createDummy();
+		manager.getPad(onPad, index);
+	}
+
+	private function onPad(pad:Pad) {
+		this.pad = pad;
+		pad.onDisconnect = onDisconnect;
+	}
+
+	private function onDisconnect() {
+		newPad();
 	}
 
 	public function destroy() {
