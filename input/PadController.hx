@@ -42,6 +42,13 @@ class PadController {
 		return 0;
 	}
 
+	/**
+		Grabs new gamepad from input manager.
+		@param manager PadManager
+		@param index Used to get input from a specific controller that is already in use.
+		@param deadzone = 0.25
+		@param outterDeadzone = 0.95
+	**/
 	public function new(manager:PadManager, ?index:Int, ?deadzone:Float = 0.25, ?outterDeadzone = 0.95) {
 		this.manager = manager;
 

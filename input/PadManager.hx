@@ -14,7 +14,6 @@ class PadManager {
 	}
 
 	private function waitPad(pad:Pad) {
-		trace('Controller ${pad.index} connected.');
 		pads[pad.index] = pad;
 
 		for (w in waiting) {
