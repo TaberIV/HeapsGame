@@ -10,9 +10,6 @@ import entity.Actor;
 class Trigger extends Entity {
 	private var actorsWithin:Array<Actor>;
 
-	public var onActorEnter:Actor->Void;
-	public var onActorExit:Actor->Void;
-
 	public var xMax(get, never):Int;
 	public var yMax(get, never):Int;
 
@@ -23,6 +20,10 @@ class Trigger extends Entity {
 	function get_yMax() {
 		return y + col.height;
 	}
+
+	public dynamic function onActorEnter(a:Actor):Void {}
+
+	public dynamic function onActorExit(a:Actor):Void {}
 
 	public function new(level:Level, x:Float, y:Float, width:Int, height:Int) {
 		super(level, x, y);
