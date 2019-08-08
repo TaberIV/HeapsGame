@@ -16,7 +16,6 @@ class PadManager {
 	}
 
 	private function onConnect(pad:Pad) {
-		trace('Gamepad ${pad.index} connected.');
 		pad.onDisconnect = onDisconnect(pad);
 		pads[pad.index] = pad;
 		users[pad.index] = new Array();
@@ -34,7 +33,6 @@ class PadManager {
 
 	private function onDisconnect(pad:Pad):Void->Void {
 		return function() {
-			trace('Gamepad ${pad.index} disconnected.');
 			var userList = users[pad.index];
 
 			pads.remove(pad.index);
