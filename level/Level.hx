@@ -71,4 +71,12 @@ class Level extends h2d.CdbLevel {
 		this.x = (scene.width >> 1) - x * scaleX;
 		this.y = (scene.height >> 1) - y * scaleY;
 	}
+
+	public function destroy() {
+		for (ent in ents) {
+			ent.destroy();
+		}
+
+		remove();
+	}
 }

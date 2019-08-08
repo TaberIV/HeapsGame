@@ -71,6 +71,6 @@ class PadManager {
 	}
 
 	public function releasePad(c:PadController):Bool {
-		return users[c.pad.index].remove(c);
+		return users.exists(c.pad.index) ? users[c.pad.index].remove(c) : false;
 	}
 }
