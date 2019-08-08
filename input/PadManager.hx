@@ -7,15 +7,20 @@ class PadManager {
 	var users:Map<Int, Array<PadController>>;
 	var waitlist:Array<Array<PadController>>;
 
+	public var idUsers(default, null):Map<String, Int>;
+
 	public function new() {
 		pads = new Map();
 		users = new Map();
 		waitlist = new Array();
 
+		idUsers = new Map();
+
 		Pad.wait(onConnect);
 	}
 
 	private function onConnect(pad:Pad) {
+		trace('Controller ${pad.index} connected.');
 		pad.onDisconnect = onDisconnect(pad);
 		pads[pad.index] = pad;
 		users[pad.index] = new Array();
@@ -33,6 +38,7 @@ class PadManager {
 
 	private function onDisconnect(pad:Pad):Void->Void {
 		return function() {
+			trace('Controller ${pad.index} disconnected.');
 			var userList = users[pad.index];
 
 			pads.remove(pad.index);
@@ -64,7 +70,7 @@ class PadManager {
 				var pad = pads[i];
 				var userList = users[i];
 
-				if (pad != null && pad.connected && userList.length == 0) {
+				if (pad != null && userList.length == 0) {
 					index = pad.index;
 					break;
 				}
