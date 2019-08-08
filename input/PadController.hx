@@ -4,9 +4,10 @@ import hxd.Pad;
 
 class PadController {
 	var manager:PadManager;
-	var pad:Pad;
 	var deadzone:Float;
 	var outterDeadzone:Float;
+
+	public var pad(default, null):Pad;
 
 	public var xAxis(get, never):Float;
 	public var yAxis(get, never):Float;
@@ -66,20 +67,19 @@ class PadController {
 
 	function newPad(?index:Int) {
 		pad = Pad.createDummy();
-		manager.getPad(this, onPad, index);
+		var connected = manager.getPad(this, index);
+
+		if (!connected && index != null) {
+			throw "Requested controller is disconnected...";
+		}
 	}
 
-	function onPad(pad:Pad) {
+	public function connectPad(pad:Pad) {
 		this.pad = pad;
-		pad.onDisconnect = onDisconnect;
-	}
-
-	function onDisconnect() {
-		newPad();
 	}
 
 	public function destroy() {
-		manager.releasePad(pad);
+		manager.releasePad(this);
 		pad = null;
 	}
 }
