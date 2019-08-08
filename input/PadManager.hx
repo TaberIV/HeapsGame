@@ -7,6 +7,7 @@ class PadManager {
 	var users:Map<Int, Array<PadController>>;
 	var waitlist:Array<Array<PadController>>;
 
+	public var reconnectOnExisting:Bool = false;
 	public var idUsers(default, null):Map<String, Int>;
 
 	public function new() {
@@ -44,19 +45,24 @@ class PadManager {
 			pads.remove(pad.index);
 			users.remove(pad.index);
 
-			// Try to get free pad for displaced users
 			if (userList.length > 0) {
-				var c = userList[0];
-				var connected = getPad(c);
+				if (reconnectOnExisting) {
+					// Try to get free pad for displaced users
+					var c = userList[0];
+					var connected = getPad(c);
 
-				if (connected) {
-					// Free pad found, add other users
-					for (i in 1...userList.length) {
-						getPad(userList[i], c.pad.index);
+					if (connected) {
+						// Free pad found, add other users
+						for (i in 1...userList.length) {
+							getPad(userList[i], c.pad.index);
+						}
+					} else {
+						// No pad found, add other users to waitlist
+						waitlist.pop(); // Remove single item list
+						waitlist.push(userList);
 					}
 				} else {
-					// No pad found, add other users to waitlist
-					waitlist.pop(); // Remove single item list
+					// Add users to waitlist for new pad
 					waitlist.push(userList);
 				}
 			}
@@ -91,6 +97,26 @@ class PadManager {
 			waitlist.push([c]);
 
 			return false;
+		}
+	}
+
+	public function setId(c:PadController, id:String):Bool {
+		if (c.pad.connected) {
+			idUsers.set(id, c.pad.index);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getPadFromId(id:String):Null<Pad> {
+		if (idUsers.exists(id)) {
+			var pad = pads[idUsers[id]];
+			idUsers.remove(id);
+
+			return pad;
+		} else {
+			return null;
 		}
 	}
 
