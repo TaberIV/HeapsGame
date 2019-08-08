@@ -3,45 +3,35 @@ package input;
 import hxd.Pad;
 
 class PadManager {
-	private var pads:Array<hxd.Pad>;
-	private var waiting:Array<{onPad:Pad->Void, ?index:Int}>;
+	var pads:Map<Int, Pad>;
 
 	public function new() {
-		pads = new Array();
-		waiting = new Array();
+		pads = new Map();
 
-		Pad.wait(waitPad);
+		Pad.wait(onConnected);
 	}
 
-	private function waitPad(pad:Pad) {
-		pads[pad.index] = pad;
+	private function onConnected(pad:Pad) {
+		pads.set(pad.index, pad);
 
-		for (w in waiting) {
-			if (w.index == null || w.index == pad.index) {
-				w.onPad(pad);
-			}
-		}
-
-		Pad.wait(waitPad);
+		Pad.wait(onConnected);
 	}
 
-	public function getPad(onPad:Pad->Void, ?index:Int) {
+	public function getPad(p:PadController, onPad:Pad->Void, ?index:Int) {
 		// Find an index with a controller
 		if (index == null) {
-			for (i in 0...pads.length) {
-				var p = pads[i];
+			for (i in pads.keys()) {
+				var pad = pads.get(i);
 
-				if (p != null && p.connected) {
-					index = i;
+				if (pad != null && pad.connected) {
+					index = pad.index;
 					break;
 				}
 			}
 		}
 
 		// If no controller (with index if indicated, or at all otherwise) is found, wait.
-		if (index == null || pads[index] == null || !pads[index].connected) {
-			waiting.push({onPad: onPad, index: index});
-		} else {
+		if (index != null && pads[index] != null && pads[index].connected) {
 			onPad(pads[index]);
 		}
 	}

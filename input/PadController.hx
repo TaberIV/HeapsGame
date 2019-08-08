@@ -3,10 +3,10 @@ package input;
 import hxd.Pad;
 
 class PadController {
-	private var manager:PadManager;
-	private var pad:Pad;
-	private var deadzone:Float;
-	private var outterDeadzone:Float;
+	var manager:PadManager;
+	var pad:Pad;
+	var deadzone:Float;
+	var outterDeadzone:Float;
 
 	public var xAxis(get, never):Float;
 	public var yAxis(get, never):Float;
@@ -14,7 +14,13 @@ class PadController {
 	public var xAxisPressed(get, never):Int;
 	public var yAxisPressed(get, never):Int;
 
-	private function get_xAxis():Float {
+	public var index(get, never):Int;
+
+	function get_index() {
+		return pad == null ? -1 : pad.index;
+	}
+
+	function get_xAxis():Float {
 		if (Math.abs(pad.xAxis) < deadzone) {
 			return 0;
 		} else if (Math.abs(pad.xAxis) > outterDeadzone) {
@@ -24,7 +30,7 @@ class PadController {
 		}
 	}
 
-	private function get_yAxis():Float {
+	function get_yAxis():Float {
 		if (Math.abs(pad.yAxis) < deadzone) {
 			return 0;
 		} else if (Math.abs(pad.yAxis) > outterDeadzone) {
@@ -34,11 +40,11 @@ class PadController {
 		}
 	}
 
-	private function get_xAxisPressed():Int {
+	function get_xAxisPressed():Int {
 		return 0;
 	}
 
-	private function get_yAxisPressed():Int {
+	function get_yAxisPressed():Int {
 		return 0;
 	}
 
@@ -58,17 +64,17 @@ class PadController {
 		newPad(index);
 	}
 
-	private function newPad(?index:Int) {
+	function newPad(?index:Int) {
 		pad = Pad.createDummy();
-		manager.getPad(onPad, index);
+		manager.getPad(this, onPad, index);
 	}
 
-	private function onPad(pad:Pad) {
+	function onPad(pad:Pad) {
 		this.pad = pad;
 		pad.onDisconnect = onDisconnect;
 	}
 
-	private function onDisconnect() {
+	function onDisconnect() {
 		newPad();
 	}
 
