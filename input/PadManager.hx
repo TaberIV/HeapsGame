@@ -16,6 +16,7 @@ class PadManager {
 	}
 
 	private function onConnect(pad:Pad) {
+		trace('Gamepad ${pad.index} connected.');
 		pad.onDisconnect = onDisconnect(pad);
 		pads[pad.index] = pad;
 		users[pad.index] = new Array();
@@ -33,9 +34,28 @@ class PadManager {
 
 	private function onDisconnect(pad:Pad):Void->Void {
 		return function() {
+			trace('Gamepad ${pad.index} disconnected.');
+			var userList = users[pad.index];
+
 			pads.remove(pad.index);
-			waitlist.push(users[pad.index]);
 			users.remove(pad.index);
+
+			// Try to get free pad for displaced users
+			if (userList.length > 0) {
+				var c = userList[0];
+				var connected = getPad(c);
+
+				if (connected) {
+					// Free pad found, add other users
+					for (i in 1...userList.length) {
+						getPad(userList[i], c.pad.index);
+					}
+				} else {
+					// No pad found, add other users to waitlist
+					waitlist.pop(); // Remove single item list
+					waitlist.push(userList);
+				}
+			}
 		}
 	}
 
