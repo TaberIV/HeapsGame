@@ -65,12 +65,6 @@ class PadController {
 		newPad(index);
 	}
 
-	public static function fromId(manager:PadManager, id:String, ?deadzone:Float = 0.25, ?outterDeadzone = 0.95) {
-		var pad = manager.getPadFromId(id);
-
-		return new PadController(manager, pad == null ? null : pad.index, deadzone, outterDeadzone);
-	}
-
 	function newPad(?index:Int) {
 		pad = Pad.createDummy();
 		var connected = manager.getPad(this, index);

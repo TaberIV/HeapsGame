@@ -121,6 +121,15 @@ class PadManager {
 	}
 
 	public function releasePad(c:PadController):Bool {
-		return users.exists(c.pad.index) ? users[c.pad.index].remove(c) : false;
+		var removedUser = users.exists(c.pad.index) ? users[c.pad.index].remove(c) : false;
+		var removedWaitlist = false;
+
+		for (group in waitlist) {
+			if (removedWaitlist = group.remove(c)) {
+				break;
+			}
+		}
+
+		return removedUser || removedWaitlist;
 	}
 }
