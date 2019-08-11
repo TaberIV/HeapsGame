@@ -11,14 +11,14 @@ import draw.Sprite;
 typedef LevelObject = (level:Level, x:Int, y:Int, w:Int, h:Int) -> Entity;
 
 class Level extends h2d.CdbLevel {
-	private var scene:Scene;
 	private var ents:Array<Entity>;
 	private var levelLayer:Int;
 
 	public var heightPx(default, null):Int;
 	public var widthPx(default, null):Int;
 
-	public var col:CollisionSystem;
+	public var scene(default, null):Scene;
+	public var col(default, null):CollisionSystem;
 	public var padManager:PadManager;
 
 	public function new(allLevels:Index<Dynamic>, index:Int, parent:Scene, ?levelLayer:Int = 1) {
