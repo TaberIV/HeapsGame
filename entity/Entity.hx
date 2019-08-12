@@ -64,7 +64,5 @@ class Entity {
 			col.destroy();
 			col = null;
 		}
-
-		level.removeEntity(this);
 	}
 }

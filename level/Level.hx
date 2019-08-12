@@ -76,6 +76,7 @@ class Level extends h2d.CdbLevel {
 		for (ent in ents) {
 			ent.destroy();
 		}
+		ents = null;
 
 		remove();
 	}
