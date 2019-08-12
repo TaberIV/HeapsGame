@@ -48,6 +48,7 @@ class Solid extends Entity {
 				} else {
 					xRemainder -= moveX;
 					move(0, moveX > 0 ? colSolid.col.xMin - col.xMax : col.xMin - colSolid.col.xMax);
+					velX = 0;
 				}
 			}
 
@@ -69,10 +70,15 @@ class Solid extends Entity {
 				} else {
 					yRemainder -= moveY;
 					move(0, moveY > 0 ? colSolid.col.yMin - col.yMax : col.yMin - colSolid.col.yMax);
+					velY = 0;
 				}
 			}
 		}
 
 		col.active = true;
+	}
+
+	public override function update(dt:Float) {
+		move(velX * dt, velY * dt);
 	}
 }
