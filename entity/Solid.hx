@@ -32,6 +32,9 @@ class Solid extends Entity {
 			if (moveX != 0) {
 				var colSolid = col.getSolidAt(x + moveX, y);
 				if (colSolid == null) {
+					xRemainder -= moveX;
+					x += moveX;
+
 					// Push or carry actors
 					// Todo: Implement function that returns these in two lists
 					for (a in level.col.actors) {
@@ -42,9 +45,6 @@ class Solid extends Entity {
 							a.moveX(moveX);
 						}
 					}
-
-					xRemainder -= moveX;
-					x += moveX;
 				} else {
 					xRemainder -= moveX;
 					move(0, moveX > 0 ? colSolid.col.xMin - col.xMax : col.xMin - colSolid.col.xMax);
@@ -54,6 +54,9 @@ class Solid extends Entity {
 			if (moveY != 0) {
 				var colSolid = col.getSolidAt(x, y + moveY);
 				if (colSolid == null) {
+					yRemainder -= moveY;
+					y += moveY;
+
 					// Push or carry actors
 					for (a in level.col.actors) {
 						if (col.intersectsAt(a.col, x, y + moveY)) {
@@ -63,9 +66,6 @@ class Solid extends Entity {
 							a.moveY(moveY);
 						}
 					}
-
-					yRemainder -= moveY;
-					y += moveY;
 				} else {
 					yRemainder -= moveY;
 					move(0, moveY > 0 ? colSolid.col.yMin - col.yMax : col.yMin - colSolid.col.yMax);
