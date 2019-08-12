@@ -22,7 +22,15 @@ class Entity {
 	public var spr:Sprite;
 	public var col:Collider;
 
-	public var onActivate:Void->Void;
+	private function set_x_Float(x:Float) {
+		this.x = Math.round(x);
+		xRemainder = x - this.x;
+	}
+
+	private function set_y_Float(y:Float) {
+		this.y = Math.round(y);
+		yRemainder = y - this.y;
+	}
 
 	public function new(level:Level, x:Float, y:Float, ?id:String) {
 		this.level = level;
@@ -39,19 +47,11 @@ class Entity {
 		init();
 	}
 
-	private function set_x_Float(x:Float) {
-		this.x = Math.round(x);
-		xRemainder = x - this.x;
-	}
-
-	private function set_y_Float(y:Float) {
-		this.y = Math.round(y);
-		yRemainder = y - this.y;
-	}
-
 	public function init() {}
 
 	public function update(dt:Float):Void {}
+
+	public dynamic function onActivate() {}
 
 	public function destroy() {
 		isDestroyed = true;
