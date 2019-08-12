@@ -9,8 +9,8 @@ import collision.Collider;
 class Solid extends Entity {
 	private var collides:Bool = false;
 
-	public var velX(default, null):Float;
-	public var velY(default, null):Float;
+	public var velX:Float;
+	public var velY:Float;
 
 	public static function levelSolid(level:Level, x:Int, y:Int, w:Int, h:Int) {
 		var solid = new Solid(level, x, y);
@@ -19,7 +19,7 @@ class Solid extends Entity {
 		return solid;
 	}
 
-	public function move(xAmount:Float, yAmount:Float) {
+	public function move(xAmount:Float, yAmount:Float):Void {
 		xRemainder += xAmount;
 		yRemainder += yAmount;
 
@@ -30,7 +30,7 @@ class Solid extends Entity {
 			col.active = false;
 
 			if (moveX != 0) {
-				var colSolid = col.getSolidAt(x + moveX, y);
+				var colSolid = collides ? col.getSolidAt(x + moveX, y) : null;
 				if (colSolid == null) {
 					xRemainder -= moveX;
 					x += moveX;
@@ -47,13 +47,13 @@ class Solid extends Entity {
 					}
 				} else {
 					xRemainder -= moveX;
-					move(0, moveX > 0 ? colSolid.col.xMin - col.xMax : col.xMin - colSolid.col.xMax);
-					velX = 0;
+					onColX(colSolid);
+					x += moveX > 0 ? colSolid.col.xMin - col.xMax : col.xMin - colSolid.col.xMax;
 				}
 			}
 
 			if (moveY != 0) {
-				var colSolid = col.getSolidAt(x, y + moveY);
+				var colSolid = collides ? col.getSolidAt(x, y + moveY) : null;
 				if (colSolid == null) {
 					yRemainder -= moveY;
 					y += moveY;
@@ -69,13 +69,21 @@ class Solid extends Entity {
 					}
 				} else {
 					yRemainder -= moveY;
-					move(0, moveY > 0 ? colSolid.col.yMin - col.yMax : col.yMin - colSolid.col.yMax);
-					velY = 0;
+					onColY(colSolid);
+					y += moveY > 0 ? colSolid.col.yMin - col.yMax : col.yMin - colSolid.col.yMax;
 				}
 			}
 		}
 
 		col.active = true;
+	}
+
+	public function onColX(solid:Solid) {
+		velX = 0;
+	}
+
+	public function onColY(solid:Solid) {
+		velY = 0;
 	}
 
 	public override function update(dt:Float) {
