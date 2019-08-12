@@ -41,7 +41,7 @@ class Solid extends Entity {
 						if (col.intersectsAt(a.col, x + moveX, y)) {
 							var aMove = moveX > 0 ? col.xMax - a.col.xMin : col.xMin - a.col.xMax;
 							a.moveX(aMove, a.squish);
-						} else if (a.isRiding(this)) {
+						} else if (a.isRiding(this, moveX, 0)) {
 							a.moveX(moveX);
 						}
 					}
@@ -62,7 +62,7 @@ class Solid extends Entity {
 						if (col.intersectsAt(a.col, x, y + moveY)) {
 							var aMove = moveY > 0 ? col.yMax - a.col.yMin : col.yMin - a.col.yMax;
 							a.moveY(aMove, a.squish);
-						} else if (a.isRiding(this)) {
+						} else if (a.isRiding(this, 0, moveY)) {
 							a.moveY(moveY);
 						}
 					}
