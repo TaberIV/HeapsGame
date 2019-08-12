@@ -53,7 +53,7 @@ class Entity {
 
 	public dynamic function onActivate() {}
 
-	public function destroy() {
+	public function destroy(?remove:Bool = true) {
 		isDestroyed = true;
 
 		if (spr != null) {
@@ -65,6 +65,8 @@ class Entity {
 			col = null;
 		}
 
-		level.removeEntity(this);
+		if (remove) {
+			level.removeEntity(this);
+		}
 	}
 }
