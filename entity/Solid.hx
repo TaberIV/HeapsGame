@@ -30,19 +30,25 @@ class Solid extends Entity {
 			col.active = false;
 
 			if (moveX != 0) {
-				// Push or carry actors
-				// Todo: Implement function that returns these in two lists
-				for (a in level.col.actors) {
-					if (col.intersectsAt(a.col, x + moveX, y)) {
-						var aMove = moveX > 0 ? col.xMax - a.col.xMin : col.xMin - a.col.xMax;
-						a.moveX(aMove, a.squish);
-					} else if (a.isRiding(this)) {
-						a.moveX(moveX);
+				var colSolid = col.getSolidAt(x + moveX, y);
+				if (colSolid == null) {
+					// Push or carry actors
+					// Todo: Implement function that returns these in two lists
+					for (a in level.col.actors) {
+						if (col.intersectsAt(a.col, x + moveX, y)) {
+							var aMove = moveX > 0 ? col.xMax - a.col.xMin : col.xMin - a.col.xMax;
+							a.moveX(aMove, a.squish);
+						} else if (a.isRiding(this)) {
+							a.moveX(moveX);
+						}
 					}
-				}
 
-				xRemainder -= moveX;
-				x += moveX;
+					xRemainder -= moveX;
+					x += moveX;
+				} else {
+					xRemainder -= moveX;
+					move(0, moveX > 0 ? colSolid.col.xMin - col.xMax : col.xMin - colSolid.col.xMax);
+				}
 			}
 
 			if (moveY != 0) {
