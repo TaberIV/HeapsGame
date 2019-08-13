@@ -60,7 +60,7 @@ class CollisionSystem {
 
 	public function pointsCollide(xMin:Int, yMin:Int, xMax:Int, yMax:Int) {
 		for (solid in solids) {
-			if (solid.col.active && Collider.pointsIntersects(xMin, yMin, xMax, yMax, solid.col)) {
+			if (solid.col.active && solid.col.pointsIntersects(xMin, yMin, xMax, yMax)) {
 				return solid;
 			}
 		}
@@ -70,7 +70,7 @@ class CollisionSystem {
 
 	public function jumpThroughAt(xMin:Int, xMax:Int, yMax:Int) {
 		for (j in jumpThroughs) {
-			if (j.col.active && Collider.pointsIntersects(xMin, yMax, xMax, yMax, j.col)) {
+			if (j.col.active && j.col.pointsIntersects(xMin, yMax, xMax, yMax + 1)) {
 				return j;
 			}
 		}

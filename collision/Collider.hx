@@ -59,12 +59,12 @@ class Collider {
 		return new Collider(ent, width, height, xOrigin - left, yOrigin - top);
 	}
 
-	public static inline function pointsIntersects(xMin:Int, yMin:Int, xMax:Int, yMax:Int, c:Collider) {
-		return !(xMin >= c.xMax || yMin >= c.yMax || xMax <= c.xMin || yMax <= c.yMin);
+	public inline function pointsIntersects(xMin:Int, yMin:Int, xMax:Int, yMax:Int) {
+		return !(xMin >= this.xMax || yMin >= this.yMax || xMax <= this.xMin || yMax <= this.yMin);
 	}
 
 	public inline function intersects(c:Collider) {
-		return pointsIntersects(xMin, yMin, xMax, yMax, c);
+		return c.pointsIntersects(xMin, yMin, xMax, yMax);
 	}
 
 	public function intersectsAt(c:Collider, x:Int, y:Int) {
@@ -74,7 +74,7 @@ class Collider {
 		var xMax = xMin + width;
 		var yMax = yMin + height;
 
-		return pointsIntersects(xMin, yMin, xMax, yMax, c);
+		return c.pointsIntersects(xMin, yMin, xMax, yMax);
 	}
 
 	public function getOverlapingActors() {
