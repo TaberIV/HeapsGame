@@ -91,6 +91,16 @@ class Collider {
 		return colSys.pointsCollide(xMin, yMin, xMax, yMax);
 	}
 
+	public function collideAt(x:Int, y:Int, ?dirY:Int = 0):Bool {
+		var col = getSolidAt(x, y);
+
+		if (col != null || dirY <= 0) {
+			return col != null;
+		} else {
+			return getJumpThroughAt(x, y) != null;
+		}
+	}
+
 	public function getJumpThroughAt(x:Int, y:Int, ?dirY:Int = 1):JumpThroughSolid {
 		if (dirY <= 0) {
 			return null;
@@ -104,14 +114,13 @@ class Collider {
 		return colSys.jumpThroughAt(xMin, xMax, yMax);
 	}
 
-	public function collideAt(x:Int, y:Int, ?dirY:Int = 0):Bool {
-		var col = getSolidAt(x, y);
+	public function onJumpThroughAt(c:Collider, x:Int, y:Int):Bool {
+		var xMin = x - xOrigin;
+		var xMax = xMin + width;
 
-		if (col != null || dirY <= 0) {
-			return col != null;
-		} else {
-			return getJumpThroughAt(x, y) != null;
-		}
+		var yMax = yMin + height;
+
+		return c.pointsIntersects(xMin, yMax, xMax, yMax + 1);
 	}
 
 	inline function get_xMin() {
