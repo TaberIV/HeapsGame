@@ -23,7 +23,6 @@ class Actor extends Entity {
 				if (solid == null) {
 					// No collision
 					x += sign;
-
 					move -= sign;
 				} else {
 					// Collision with solid
@@ -48,18 +47,18 @@ class Actor extends Entity {
 			// Move and check for collision
 			while (move != 0) {
 				var solid = col.getSolidAt(x, y + sign);
+				var j = solid == null ? col.getJumpThroughAt(x, y + sign, sign) : null;
 
-				if (solid == null) {
+				if (solid == null && j == null) {
 					// No collision
 					y += sign;
-
 					move -= sign;
 				} else {
 					// Collision with solid
 					move = 0;
 
 					if (action != null) {
-						action(solid);
+						action(solid == null ? j : solid);
 					}
 				}
 			}

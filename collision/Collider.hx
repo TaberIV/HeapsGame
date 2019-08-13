@@ -36,10 +36,13 @@ class Collider {
 		this.width = width;
 		this.height = height;
 
-		if (Std.downcast(ent, Actor) != null) {
-			colSys.addActor(Std.downcast(ent, Actor));
-		} else if (Std.downcast(ent, Solid) != null) {
-			colSys.addSolid(Std.downcast(ent, Solid));
+		var a, j, s;
+		if ((a = Std.downcast(ent, Actor)) != null) {
+			colSys.addActor(a);
+		} else if ((j = Std.downcast(ent, JumpThroughSolid)) != null) {
+			colSys.addJumpThrough(j);
+		} else if ((s = Std.downcast(ent, Solid)) != null) {
+			colSys.addSolid(s);
 		}
 	}
 
@@ -88,8 +91,27 @@ class Collider {
 		return colSys.pointsCollide(xMin, yMin, xMax, yMax);
 	}
 
-	public function collideAt(x:Int, y:Int):Bool {
-		return getSolidAt(x, y) != null;
+	public function getJumpThroughAt(x:Int, y:Int, ?dirY:Int = 1):JumpThroughSolid {
+		if (dirY <= 0) {
+			return null;
+		}
+
+		var xMin = x - xOrigin;
+		var xMax = xMin + width;
+
+		var yMax = yMin + height;
+
+		return colSys.jumpThroughAt(xMin, xMax, yMax);
+	}
+
+	public function collideAt(x:Int, y:Int, ?dirY:Int = 0):Bool {
+		var col = getSolidAt(x, y);
+
+		if (col != null || dirY <= 0) {
+			return col != null;
+		} else {
+			return getJumpThroughAt(x, y) != null;
+		}
 	}
 
 	inline function get_xMin() {
