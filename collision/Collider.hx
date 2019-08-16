@@ -26,7 +26,7 @@ class Collider {
 
 	public var active:Bool = true;
 
-	public function new(ent:Entity, width:Int, height:Int, ?xOrigin:Int, ?yOrigin:Int) {
+	public function new(ent:Entity, width:Int, height:Int, ?xOrigin:Int, ?yOrigin:Int, ?isTrigger:Bool = false) {
 		this.ent = ent;
 		colSys = ent.level.col;
 
@@ -36,17 +36,19 @@ class Collider {
 		this.width = width;
 		this.height = height;
 
-		var a, j, s;
-		if ((a = Std.downcast(ent, Actor)) != null) {
-			colSys.addActor(a);
-		} else if ((j = Std.downcast(ent, JumpThroughSolid)) != null) {
-			colSys.addJumpThrough(j);
-		} else if ((s = Std.downcast(ent, Solid)) != null) {
-			colSys.addSolid(s);
+		if (!isTrigger) {
+			var a, j, s;
+			if ((a = Std.downcast(ent, Actor)) != null) {
+				colSys.addActor(a);
+			} else if ((j = Std.downcast(ent, JumpThroughSolid)) != null) {
+				colSys.addJumpThrough(j);
+			} else if ((s = Std.downcast(ent, Solid)) != null) {
+				colSys.addSolid(s);
+			}
 		}
 	}
 
-	public static function fromSprite(ent:Entity, top:Int, bottom:Int, left:Int, right:Int, ?xOrigin:Int, ?yOrigin:Int) {
+	public static function fromSprite(ent:Entity, top:Int, bottom:Int, left:Int, right:Int, ?xOrigin:Int, ?yOrigin:Int, ?isTrigger:Bool = false) {
 		var sprWidth = ent.spr.width;
 		var sprHeight = ent.spr.height;
 
@@ -56,7 +58,7 @@ class Collider {
 		xOrigin = xOrigin == null ? (sprWidth >> 1) : xOrigin;
 		yOrigin = yOrigin == null ? (sprHeight >> 1) : yOrigin;
 
-		return new Collider(ent, width, height, xOrigin - left, yOrigin - top);
+		return new Collider(ent, width, height, xOrigin - left, yOrigin - top, isTrigger);
 	}
 
 	public inline function pointsIntersects(xMin:Int, yMin:Int, xMax:Int, yMax:Int) {
