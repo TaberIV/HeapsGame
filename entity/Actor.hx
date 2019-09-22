@@ -8,7 +8,7 @@ import entity.Solid;
 class Actor extends Entity {
 	private var lastRide:Solid;
 
-	public function moveX(amount:Float, ?action:Solid->Void) {
+	public function moveX(amount:Float, ?action:Solid->Void, ?slipWidth:Int) {
 		xRemainder += amount;
 		var move:Int = Math.round(xRemainder);
 
@@ -25,18 +25,28 @@ class Actor extends Entity {
 					x += sign;
 					move -= sign;
 				} else {
-					// Collision with solid
-					if (action != null) {
-						action(solid);
+					var slip = 0;
+					if (slipWidth > 0) {
+						// if (!col.collideAt(x + sign, y + slipWidth)) {
+						// 	slip = 1;
+						// } else
+						if (!col.collideAt(x + sign, y - slipWidth)) {
+							slip = -1;
+						}
 					}
 
+					if (slip != 0) {
+						yRemainder += slip * Math.abs(move);
+					} else if (action != null) {
+						action(solid);
+					}
 					move = 0;
 				}
 			}
 		}
 	}
 
-	public function moveY(amount:Float, ?action:Solid->Void) {
+	public function moveY(amount:Float, ?action:Solid->Void, ?slipWidth:Int) {
 		yRemainder += amount;
 		var move:Int = Math.round(yRemainder);
 
@@ -47,19 +57,28 @@ class Actor extends Entity {
 			// Move and check for collision
 			while (move != 0) {
 				var solid = col.getSolidAt(x, y + sign);
-				var j = solid == null ? col.getJumpThroughAt(x, y + sign, sign) : null;
+				solid = solid == null ? col.getJumpThroughAt(x, y + sign, sign) : solid;
 
-				if (solid == null && j == null) {
+				if (solid == null) {
 					// No collision
 					y += sign;
 					move -= sign;
 				} else {
-					// Collision with solid
-					move = 0;
-
-					if (action != null) {
-						action(solid == null ? j : solid);
+					var slip = 0;
+					if (slipWidth > 0) {
+						if (!col.collideAt(x + slipWidth, y + sign)) {
+							slip = 1;
+						} else if (!col.collideAt(x - slipWidth, y + sign)) {
+							slip = -1;
+						}
 					}
+
+					if (slip != 0) {
+						xRemainder += slip * Math.abs(move);
+					} else if (action != null) {
+						action(solid);
+					}
+					move = 0;
 				}
 			}
 		}
